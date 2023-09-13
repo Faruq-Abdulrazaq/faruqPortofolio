@@ -66,13 +66,13 @@ export default function Home() {
               <AiFillGithub />
             </a>
           </div>
-          <div className="relative mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:h-96 md:w-96">
+          <div className="relative mx-auto bg-gradient-to-b from-teal-500 rounded-full w-80 h-80 mt-20 overflow-hidden md:h-96 md:w-96 mb-5">
             <Image src={dev_byte} alt="Faruq" layout="fill" objectFit="cover" />
           </div>
         </section>
         <section>
           <div>
-            <h3 className="text-3xl py-1 dark:text-gray-200">
+            <h3 className="text-3xl py-1 dark:text-gray-200 mx-auto mt-3">
               Services I offer
             </h3>
 
