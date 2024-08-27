@@ -6,7 +6,7 @@ const Projects = () => {
   return (
     <section className="w-full mt-10 flex flex-col justify-center items-center">
       <div className="w-[90%] flex flex-col justify-center items-center m-5">
-        <p className="text-center font-bold text-[25px]">
+        <p className="text-left lg:text-center font-bold text-[25px]">
           Discover how I turn ideas into reality through my diverse range of
           software projects.
         </p>

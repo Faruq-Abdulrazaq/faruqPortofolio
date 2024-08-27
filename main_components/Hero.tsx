@@ -8,11 +8,11 @@ const Hero = () => {
     <section className="w-full flex flex-col lg:flex-row">
       <div className="lg:w-[50%] w-auto h-full flex justify-center items-center gap-5 flex-col">
         <section className="flex justify-center items-start flex-col w-[70%]">
-          <h2 className="font-bold text-[30px] lg:text-[70px]">
+          <h2 className="font-bold text-[30px] lg:text-[60px]">
             <span className="text-faruq_third"> Hey ! I am</span> <br />{" "}
             <span className="text-faruq_primary"> Faruq Abdulrazaq </span>
           </h2>
-          <span className="text-faruq_secondry text-[30px]">
+          <span className="text-faruq_secondry lg:text-[30px] text-[20px]">
             A Software Developer
             <br />
             <p className="text-[20px] text-black mt-5">
@@ -32,7 +32,7 @@ const Hero = () => {
           </div>
           <div className="flex lg:flex-row gap-4 flex-col mb-5">
             <Button className="bg-faruq_secondry">Hire me</Button>
-            <div className="flex gap-5 items-center justify-between">
+            <div className="flex gap-3 lg:gap-5 items-center justify-between">
               <Image src="/icons/fiverr.png" alt="" width={40} height={50} />
               <Image src="/icons/linkedin.png" alt="" width={40} height={50} />
               <Image src="/icons/github.png" alt="" width={40} height={50} />
@@ -78,7 +78,7 @@ const Hero = () => {
 
       <Icons />
 
-      <div className="w-16 h-16 border-4 border-faruq_primary rounded-full flex justify-center items-center fixed cursor-pointer top-[85%] left-[95%]">
+      <div className="w-16 h-16 border-4 border-faruq_primary rounded-full flex justify-center items-center fixed cursor-pointer top-[85%] left-[80%] lg:left-[95%]">
         <Image src="/chat.png" alt="chat icon" width={40} height={40} />
       </div>
     </section>

@@ -147,8 +147,8 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
           </div>
         </div>
       </div>
-      <div className="w-full flex-col lg:flex-row h-[30%] flex justify-around gap-5 border-t-2">
-        <div className="w-[40%] h-full flex justify-between mt-4">
+      <div className="w-full flex-col lg:flex-row  flex justify-around gap-5 border-t-2">
+        <div className="w-auto lg:w-[40%] h-full flex justify-between mt-4">
           <div className="m-4 flex flex-col">
             <h1 className="font-bold mb-4">General</h1>
             <ul className="text-faruq_secondry flex flex-col gap-2">
@@ -189,12 +189,12 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
             <ul className="text-faruq_secondry flex flex-col gap-2">
               <li>+2348075256960</li>
               <a href="mailto: faruqtayeabdulrazaq@gmail.com">
-                <li>faruqtayeabdulrazaq@gmail.com</li>
+                <li>Email me</li>
               </a>
             </ul>
           </div>
         </div>
-        <div className="w-[40%] h-[60%]">
+        <div className="w-auto lg:w-[40%] h-[60%]">
           <div className="w-[95%] h-full  flex flex-col gap-5 p-6 border-2 m-4 rounded-xl">
             <div className="flex  items-center">
               {" "}

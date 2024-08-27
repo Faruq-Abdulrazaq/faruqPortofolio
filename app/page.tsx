@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full">
+    <div className="p-4 mx-auto">
       <Navbar
         scrollToSection={scrollToSection}
         refs={{ aboutRef, servicesRef, projectsRef, testimonialsRef, blogRef }}

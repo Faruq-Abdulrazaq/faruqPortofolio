@@ -8,7 +8,7 @@ import Tech_and_IT from "../public/Tech-and-IT-consultation.png";
 const Services = () => {
   return (
     <section className="w-full flex flex-col justify-center items-center mt-6">
-      <h1 className="mt-10 font-bold text-[20px] lg:text-[25px] text-center w-[350px] lg:w-[1000px]">
+      <h1 className="mt-10 font-bold text-[25px] text-left lg:text-center w-[350px] lg:w-[1000px]">
         Let's build a digital future together. Explore my range of software
         development services.
       </h1>

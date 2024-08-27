@@ -5,7 +5,7 @@ import React from "react";
 const Blog = () => {
   return (
     <section className="w-full flex flex-col justify-center items-center mt-6">
-      <h2 className="text-center font-bold w-[350px] lg:w-auto lg:text-[25px]">
+      <h2 className="text-center lg:text-center font-bold w-[350px] lg:w-auto text-[20px] lg:text-[25px]">
         Sharing insights and knowledge about the world of software development
         and stay updated with the latest trends and best practices.
       </h2>
