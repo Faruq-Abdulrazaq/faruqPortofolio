@@ -19,30 +19,35 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
       <div className="hidden lg:flex items-center justify-end gap-5">
         <Button variant="outline">Home</Button>
         <Button
-          onClick={() => scrollToSection(refs.aboutRef)}
+          onClick={() => refs?.aboutRef && scrollToSection(refs.aboutRef)}
           variant="outline"
         >
           About me
         </Button>
         <Button
-          onClick={() => scrollToSection(refs.servicesRef)}
+          onClick={() => refs?.servicesRef && scrollToSection(refs.servicesRef)}
           variant="outline"
         >
           My services
         </Button>
         <Button
-          onClick={() => scrollToSection(refs.projectsRef)}
+          onClick={() => refs?.projectsRef && scrollToSection(refs.projectsRef)}
           variant="outline"
         >
           Projects
         </Button>
         <Button
-          onClick={() => scrollToSection(refs.testimonialsRef)}
+          onClick={() =>
+            refs?.testimonialsRef && scrollToSection(refs.testimonialsRef)
+          }
           variant="outline"
         >
           Testimonials
         </Button>
-        <Button onClick={() => scrollToSection(refs.blogRef)} variant="outline">
+        <Button
+          onClick={() => refs?.blogRef && scrollToSection(refs.blogRef)}
+          variant="outline"
+        >
           Blog
         </Button>
 
