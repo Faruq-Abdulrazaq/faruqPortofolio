@@ -19,33 +19,51 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
       <div className="hidden lg:flex items-center justify-end gap-5">
         <Button variant="outline">Home</Button>
         <Button
-          onClick={() => refs?.aboutRef && scrollToSection(refs.aboutRef)}
+          onClick={() => {
+            if (scrollToSection && refs?.aboutRef) {
+              scrollToSection(refs.aboutRef);
+            }
+          }}
           variant="outline"
         >
           About me
         </Button>
         <Button
-          onClick={() => refs?.servicesRef && scrollToSection(refs.servicesRef)}
+          onClick={() => {
+            if (scrollToSection && refs?.servicesRef) {
+              scrollToSection(refs?.servicesRef);
+            }
+          }}
           variant="outline"
         >
           My services
         </Button>
         <Button
-          onClick={() => refs?.projectsRef && scrollToSection(refs.projectsRef)}
+          onClick={() => {
+            if (scrollToSection && refs?.projectsRef) {
+              scrollToSection(refs?.projectsRef);
+            }
+          }}
           variant="outline"
         >
           Projects
         </Button>
         <Button
-          onClick={() =>
-            refs?.testimonialsRef && scrollToSection(refs.testimonialsRef)
-          }
+          onClick={() => {
+            if (scrollToSection && refs?.testimonialsRef) {
+              scrollToSection(refs?.testimonialsRef);
+            }
+          }}
           variant="outline"
         >
           Testimonials
         </Button>
         <Button
-          onClick={() => refs?.blogRef && scrollToSection(refs.blogRef)}
+          onClick={() => {
+            if (scrollToSection && refs?.blogRef) {
+              scrollToSection(refs?.blogRef);
+            }
+          }}
           variant="outline"
         >
           Blog
