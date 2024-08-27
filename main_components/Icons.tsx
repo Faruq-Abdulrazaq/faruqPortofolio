@@ -66,7 +66,12 @@ const FloatingElement: React.FC<{
       className="fixed w-16 h-16 border-4 bg-white rounded-full flex justify-center items-center cursor-pointer transition-transform"
       style={{ transform: `translate(0, 0)` }}
     >
-      <Image src={image.src} alt={image.alt} width={30} height={30} />
+      <Image
+        src={image.src || "/icons/default.png"} // Add a fallback image
+        alt={image.alt || "icon"}
+        width={30}
+        height={30}
+      />
     </div>
   );
 };
@@ -87,7 +92,7 @@ const Icons: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute  w-52 h-54 bg-slate-600">
+    <div className="absolute w-52 h-54 bg-slate-600">
       {images.map((image, index) => (
         <FloatingElement
           key={index}
