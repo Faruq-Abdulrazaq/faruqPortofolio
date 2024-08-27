@@ -92,7 +92,7 @@ const Icons: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute w-52 h-54 bg-slate-600">
+    <div className="hidden lg:block w-52 h-54 bg-slate-600 lg:absolute">
       {images.map((image, index) => (
         <FloatingElement
           key={index}
