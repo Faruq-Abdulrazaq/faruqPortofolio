@@ -24,7 +24,7 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   return (
     <section className="flex items-center flex-col">
       <div className="w-full h-[65%] flex justify-around gap-1 flex-col">
-        <h1 className="text-[35px] font-bold ml-16">Get in Touch </h1>
+        <h1 className="text-[35px]  font-bold ml-16">Get in Touch </h1>
         <div className="w-full h-[95%] flex flex-col justify-around gap-5 lg:flex-row">
           <div className="w-auto lg:w-[50%] h-full flex flex-col justify-center items-center gap-5">
             <div className="w-[90%]  p-2">
