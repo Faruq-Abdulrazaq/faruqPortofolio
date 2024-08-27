@@ -153,12 +153,7 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
             <h1 className="font-bold mb-4">General</h1>
             <ul className="text-faruq_secondry flex flex-col gap-2">
               <li className="cursor-pointer">Home</li>
-              <li
-                className="cursor-pointer"
-                onClick={() => scrollToSection(refs.aboutRef)}
-              >
-                About
-              </li>
+              <li className="cursor-pointer">About</li>
               <li className="cursor-pointer">Blogs</li>
               <li className="cursor-pointer">Projects</li>
             </ul>
