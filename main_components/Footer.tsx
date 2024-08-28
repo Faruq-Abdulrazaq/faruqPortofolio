@@ -22,7 +22,7 @@ import { NavProps } from "@/types";
 
 const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   return (
-    <section className="flex items-center flex-col">
+    <section className="flex items-center flex-col mt-10">
       <div className="w-full h-[65%] flex justify-around gap-1 flex-col">
         <h1 className="text-[35px]  font-bold ml-16">Get in Touch </h1>
         <div className="w-full h-[95%] flex flex-col justify-around gap-5 lg:flex-row">

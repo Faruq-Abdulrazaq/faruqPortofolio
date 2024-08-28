@@ -17,7 +17,7 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
     <div className="w-full flex flex-wrap justify-between items-center p-4">
       <div className="flex-shrink-0">
         <Image
-          className="ml-auto lg:ml-24"
+          className="ml-0 lg:ml-24"
           src="/faruq_logo_main.png"
           alt="faruq logo"
           width={150}

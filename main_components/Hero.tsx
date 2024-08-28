@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <section className="w-full flex flex-col lg:flex-row">
       <div className="lg:w-[50%] w-auto h-full flex justify-center items-center gap-5 flex-col">
-        <section className="flex justify-center items-start flex-col w-[70%]">
+        <section className="flex justify-center items-start flex-col w-auto lg:w-[70%]">
           <h2 className="font-bold text-[30px] lg:text-[60px]">
             <span className="text-faruq_third"> Hey ! I am</span> <br />{" "}
             <span className="text-faruq_primary"> Faruq Abdulrazaq </span>
