@@ -6,10 +6,10 @@ const Projects = () => {
   return (
     <section className="w-full mt-10 flex flex-col justify-center items-center">
       <div className="w-[90%] flex flex-col justify-center items-center m-5">
-        <p className="text-left lg:text-center font-bold text-[25px]">
+        <h1 className="text-left lg:text-center font-bold text-[25px]">
           Discover how I turn ideas into reality through my diverse range of
           software projects.
-        </p>
+        </h1>
         <div className=" w-full flex flex-wrap flex-col lg:flex-row  gap-7 justify-center mt-5">
           <div className="lg:w-[30%] border-2  w-auto h-[250px] rounded-lg p-3 flex flex-col justify-center gap-3">
             <div className="flex gap-2 items-center">

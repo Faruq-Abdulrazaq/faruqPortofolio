@@ -5,10 +5,10 @@ import React from "react";
 const Testimonials = () => {
   return (
     <section className="w-full mt-20  flex flex-col justify-center items-center">
-      <h2 className="text-left lg:text-center font-bold text-[25px]">
-        Few words from pleased clients showcasing their experience
-      </h2>
       <div className="w-[87%] h-full flex flex-col justify-center items-center m-5">
+        <h1 className="text-left lg:text-center font-bold text-[25px]">
+          Few words from pleased clients showcasing their experience
+        </h1>
         {/* <div className="w-full h-[10%] flex justify-end items-center">
           <div className="mr-5 flex gap-3">
             <ChevronLeftCircle size={40} />

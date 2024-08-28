@@ -18,7 +18,7 @@ const About = () => {
               />
               <div className="ml-2">
                 <h2 className="font-bold">Mission</h2>
-                <p className="text-[12px] lg:text-[15px] ">
+                <p className="text-[12px] lg:text-[15px]">
                   To create innovative, user-friendly software solutions that
                   prioritize customer needs, uphold excellence, and embrace
                   simplicity and forward-thinking to drive progress.
