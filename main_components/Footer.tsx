@@ -1,7 +1,15 @@
+"use client";
+import { NextApiRequest, NextApiResponse } from "next";
+import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import React from "react";
+import { collection, addDoc } from "firebase/firestore";
+import SibApiV3Sdk from "sib-api-v3-typescript";
+
 import {
   Card,
   CardContent,
@@ -19,8 +27,82 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { NavProps } from "@/types";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { db } from "@/utils/Firebase";
 
 const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
+  const subSchema = z.object({
+    email: z.string().email({ message: "Invalid email address" }),
+  });
+
+  const sub_form = useForm<z.infer<typeof subSchema>>({
+    resolver: zodResolver(subSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const handleSub = async (values: z.infer<typeof subSchema>) => {
+    try {
+      const response = await fetch("/api/createContact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: values.email }),
+      });
+
+      if (response.ok) {
+        console.log("Contact created successfully");
+      } else {
+        console.error("Failed to create contact");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    console.error(values);
+  };
+
+  const contactSchema = z.object({
+    first_name: z.string().min(2, {
+      message: "First name must be at least 2 characters.",
+    }),
+    last_name: z.string().min(2, {
+      message: "Last name must be at least 2 characters.",
+    }),
+    email: z.string().email({ message: "Invalid email address" }),
+    message: z.string().min(2, {
+      message: "Message must be at least 2 characters.",
+    }),
+    service_type: z.string({ required_error: "Please select a service" }),
+  });
+
+  const form = useForm<z.infer<typeof contactSchema>>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      message: "",
+      service_type: "",
+    },
+  });
+  const handleSubmit = async (values: z.infer<typeof contactSchema>) => {
+    try {
+      const docRef = await addDoc(collection(db, "contacts"), values);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
   return (
     <section className="flex items-center flex-col mt-10">
       <div className="w-full h-[65%] flex justify-around gap-1 flex-col">
@@ -101,48 +183,112 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form>
-                  <div className="grid w-full items-center gap-4">
-                    <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="first_name">First name</Label>
-                      <Input id="first_name" placeholder="First name" />
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(handleSubmit)} className="">
+                    <div className="grid w-full items-center gap-4">
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="first_name">First name</Label>
+                        <FormField
+                          control={form.control}
+                          name="first_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="First name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="last_name">Last name</Label>
+                        <FormField
+                          control={form.control}
+                          name="last_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="Last name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="email">Email</Label>
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="Email address" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="eessage">Message</Label>
+                        <FormField
+                          control={form.control}
+                          name="message"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="Message" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <FormField
+                          control={form.control}
+                          name="service_type"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Service type</FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                                required
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select a service" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="Custom_Software_Development">
+                                    Custom Software Development
+                                  </SelectItem>
+                                  <SelectItem value="Automation_and_AI">
+                                    Automation and AI
+                                  </SelectItem>
+                                  <SelectItem value=" Web_and_Mobile_Applications">
+                                    Web and Mobile Applications
+                                  </SelectItem>
+                                  <SelectItem value="Tech_and_IT_consultation">
+                                    Tech and IT consultation
+                                  </SelectItem>
+                                  <SelectItem value="Others">Others</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="last_name">Last name</Label>
-                      <Input id="last_name" placeholder="Last name" />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" placeholder="Email address" />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="framework">Service type</Label>
-                      <Select>
-                        <SelectTrigger id="framework">
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent position="popper">
-                          <SelectItem value="Custom_Software_Development">
-                            Custom Software Development
-                          </SelectItem>
-                          <SelectItem value="Automation_and_AI">
-                            Automation and AI
-                          </SelectItem>
-                          <SelectItem value=" Web_and_Mobile_Applications">
-                            Web and Mobile Applications
-                          </SelectItem>
-                          <SelectItem value="Tech_and_IT_consultation">
-                            Tech and IT consultation
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </form>
+                    <Button className="bg-faruq_secondry mt-5">Submit</Button>
+                  </form>
+                </Form>
               </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button>Submit</Button>
-              </CardFooter>
             </Card>
           </div>
         </div>
@@ -211,10 +357,25 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
               unsubscribe at any time.
             </p>
             <div className="flex w-full max-w-sm items-center space-x-2">
-              <Input type="email" placeholder="Email" />
-              <Button className="bg-faruq_primary" type="submit">
-                Subscribe
-              </Button>
+              <Form {...sub_form}>
+                <form onSubmit={sub_form.handleSubmit(handleSub)} className="">
+                  <FormField
+                    control={sub_form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Email address" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button className="bg-faruq_primary mt-5" type="submit">
+                    Subscribe
+                  </Button>
+                </form>
+              </Form>
             </div>
           </div>
         </div>

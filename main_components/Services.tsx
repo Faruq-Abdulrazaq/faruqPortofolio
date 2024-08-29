@@ -4,6 +4,7 @@ import custom_software from "../public/custom-software-development.png";
 import automation from "../public/automation-and-AI.png";
 import web_mobile from "../public/web-mobile-applications.png";
 import Tech_and_IT from "../public/Tech-and-IT-consultation.png";
+import brand from "../public/brand.png";
 
 const Services = () => {
   return (
@@ -13,7 +14,7 @@ const Services = () => {
         development services.
       </h1>
       <div className="w-auto lg:w-[90%]">
-        <div className="flex flex-col lg:flex-row gap-10 justify-center items-center">
+        <div className="flex flex-col lg:flex-row gap-10 justify-center items-center flex-wrap">
           <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%]">
             <Image
               src={custom_software}
@@ -50,6 +51,26 @@ const Services = () => {
               and enhance productivity. My AI-driven systems can handle
               repetitive tasks, make data-driven decisions, and provide insights
               to propel your business forward.
+            </p>
+          </div>
+
+          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%]">
+            <Image
+              src={brand}
+              alt="design"
+              width={100}
+              height={100}
+              className="mx-auto"
+            />
+            <h3 className="text-lg font-medium pt-8 pb-2 dark:text-gray-200">
+              Elevate Your Brand Identity and Presence
+            </h3>
+            <p className="py-2 dark:text-gray-200">
+              Elevating your brand identity and presence through strategic
+              design and consistent messaging. I craft impactful visuals,
+              develop cohesive brand strategies, and ensure your brand stands
+              out across all platforms. Let’s create a brand that resonates and
+              drives growth.
             </p>
           </div>
 
