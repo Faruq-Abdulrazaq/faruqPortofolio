@@ -1,6 +1,6 @@
 "use client";
-import { NextApiRequest, NextApiResponse } from "next";
-import React from "react";
+
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
-import SibApiV3Sdk from "sib-api-v3-typescript";
+import { toast } from "sonner";
 
 import {
   Card,
@@ -38,38 +38,54 @@ import {
 import { db } from "@/utils/Firebase";
 
 const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
+  const [isLoading, setIsLoading] = useState("");
+
+  // Subscribe to me
   const subSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
+    name: z.string().min(2, { message: "Fullname must be more than 2 leters" }),
   });
 
   const sub_form = useForm<z.infer<typeof subSchema>>({
     resolver: zodResolver(subSchema),
     defaultValues: {
       email: "",
+      name: "",
     },
   });
 
   const handleSub = async (values: z.infer<typeof subSchema>) => {
+    setIsLoading("Sub");
     try {
-      const response = await fetch("/api/createContact", {
+      const response = await fetch("/api/brevo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: values.email }),
+        body: JSON.stringify({
+          email: values.email,
+          attributes: {
+            FNAME: values.name,
+          },
+          emailBlacklisted: false,
+          smsBlacklisted: false,
+          listIds: [21],
+          updateEnabled: false,
+          smtpBlacklistSender: ["info@faruqabdulrazaq.dev"],
+        }),
       });
 
       if (response.ok) {
-        console.log("Contact created successfully");
-      } else {
-        console.error("Failed to create contact");
+        setIsLoading("");
+        toast("Contact created successfully");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setIsLoading("");
+      toast(`Error: , ${error}`);
     }
-    console.error(values);
   };
 
+  //Contact me
   const contactSchema = z.object({
     first_name: z.string().min(2, {
       message: "First name must be at least 2 characters.",
@@ -95,12 +111,16 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
     },
   });
   const handleSubmit = async (values: z.infer<typeof contactSchema>) => {
+    setIsLoading("Con");
+
     try {
       const docRef = await addDoc(collection(db, "contacts"), values);
-      console.log("Document written with ID: ", docRef.id);
+      toast("Contact sent sucessfully");
     } catch (e) {
-      console.error("Error adding document: ", e);
+      toast(`Error: , ${e}`);
     }
+
+    setIsLoading("");
   };
 
   return (
@@ -285,7 +305,16 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
                         />
                       </div>
                     </div>
-                    <Button className="bg-faruq_secondry mt-5">Submit</Button>
+                    {isLoading === "Con" ? (
+                      <Button
+                        className="bg-faruq_secondry mt-5 w-36 lg:w-auto"
+                        disabled
+                      >
+                        <span className="loader"></span>
+                      </Button>
+                    ) : (
+                      <Button className="bg-faruq_secondry mt-5">Submit</Button>
+                    )}
                   </form>
                 </Form>
               </CardContent>
@@ -358,7 +387,10 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
             </p>
             <div className="flex w-full max-w-sm items-center space-x-2">
               <Form {...sub_form}>
-                <form onSubmit={sub_form.handleSubmit(handleSub)} className="">
+                <form
+                  onSubmit={sub_form.handleSubmit(handleSub)}
+                  className="flex flex-col lg:flex-row gap-3 items-start lg:items-center"
+                >
                   <FormField
                     control={sub_form.control}
                     name="email"
@@ -371,9 +403,30 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
                       </FormItem>
                     )}
                   />
-                  <Button className="bg-faruq_primary mt-5" type="submit">
-                    Subscribe
-                  </Button>
+                  <FormField
+                    control={sub_form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Fullname" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {isLoading === "Sub" ? (
+                    <Button
+                      className="bg-faruq_primary w-36 lg:w-auto"
+                      disabled
+                    >
+                      <span className="loader"></span>
+                    </Button>
+                  ) : (
+                    <Button className="bg-faruq_primary" type="submit">
+                      Subscribe
+                    </Button>
+                  )}
                 </form>
               </Form>
             </div>
