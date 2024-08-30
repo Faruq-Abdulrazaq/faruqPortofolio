@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import Icons from "./Icons";
+import { NavProps } from "@/types";
 
-const Hero = () => {
+const Hero: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   return (
     <section className="w-full flex flex-col lg:flex-row">
       <div className="lg:w-[50%] w-auto h-full flex justify-center items-center gap-5 flex-col">
@@ -31,7 +32,16 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex lg:flex-row gap-4 flex-col mb-5">
-            <Button className="bg-faruq_secondry">Hire me</Button>
+            <Button
+              onClick={() =>
+                scrollToSection &&
+                refs?.footerRef &&
+                scrollToSection(refs?.footerRef)
+              }
+              className="bg-faruq_secondry"
+            >
+              Hire me
+            </Button>
             <div className="flex gap-3 lg:gap-5 items-center justify-between">
               <Image src="/icons/fiverr.png" alt="" width={40} height={50} />
               <Image src="/icons/linkedin.png" alt="" width={40} height={50} />

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const About = () => {
@@ -81,9 +82,11 @@ const About = () => {
             delivering innovative and salable applications that drive business
             growth.
           </p>
-          <Button className="w-auto lg:w-[20%] bg-faruq_primary">
-            Contact me
-          </Button>
+          <Link href="https://firebasestorage.googleapis.com/v0/b/faruqportfolio.appspot.com/o/FARUQ%20TAYE%20ABDULRAZAQ%20_%20SOFTWARE%20ENGINEER.docx?alt=media&token=dd7f877d-73f6-4340-9eff-41f254fa7fa8">
+            <Button className="w-auto lg:w-[20%] bg-faruq_primary">
+              Get resume
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

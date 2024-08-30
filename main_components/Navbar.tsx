@@ -79,7 +79,16 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
         >
           Blog
         </Button>
-        <Button className="bg-faruq_secondry mr-5">Contact me</Button>
+        <Button
+          onClick={() =>
+            scrollToSection &&
+            refs?.footerRef &&
+            scrollToSection(refs?.footerRef)
+          }
+          className="bg-faruq_secondry mr-5"
+        >
+          Contact me
+        </Button>
       </div>
 
       {/* Side drawer for small screens */}
@@ -142,7 +151,16 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
           >
             Blog
           </Button>
-          <Button className="bg-faruq_secondry m-3">Contact me</Button>
+          <Button
+            onClick={() =>
+              scrollToSection &&
+              refs?.footerRef &&
+              scrollToSection(refs?.footerRef)
+            }
+            className="bg-faruq_secondry m-3"
+          >
+            Contact me
+          </Button>
         </div>
       )}
     </div>

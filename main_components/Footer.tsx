@@ -287,6 +287,9 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
                                   <SelectItem value="Custom_Software_Development">
                                     Custom Software Development
                                   </SelectItem>
+                                  <SelectItem value="Branding">
+                                    Branding
+                                  </SelectItem>
                                   <SelectItem value="Automation_and_AI">
                                     Automation and AI
                                   </SelectItem>
@@ -328,9 +331,36 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
             <h1 className="font-bold mb-4">General</h1>
             <ul className="text-faruq_secondry flex flex-col gap-2">
               <li className="cursor-pointer">Home</li>
-              <li className="cursor-pointer">About</li>
-              <li className="cursor-pointer">Blogs</li>
-              <li className="cursor-pointer">Projects</li>
+              <li
+                onClick={() =>
+                  scrollToSection &&
+                  refs?.aboutRef &&
+                  scrollToSection(refs.aboutRef)
+                }
+                className="cursor-pointer"
+              >
+                About
+              </li>
+              <li
+                onClick={() =>
+                  scrollToSection &&
+                  refs?.servicesRef &&
+                  scrollToSection(refs?.servicesRef)
+                }
+                className="cursor-pointer"
+              >
+                Services
+              </li>
+              <li
+                onClick={() =>
+                  scrollToSection &&
+                  refs?.projectsRef &&
+                  scrollToSection(refs?.projectsRef)
+                }
+                className="cursor-pointer"
+              >
+                Projects
+              </li>
             </ul>
           </div>
           <div className="m-4 flex flex-col">

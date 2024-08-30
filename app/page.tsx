@@ -17,7 +17,7 @@ export default function Home() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const blogRef = useRef<HTMLDivElement>(null);
-
+  const footerRef = useRef<HTMLDivElement>(null);
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -26,10 +26,27 @@ export default function Home() {
     <div className="p-4 mx-auto">
       <Navbar
         scrollToSection={scrollToSection}
-        refs={{ aboutRef, servicesRef, projectsRef, testimonialsRef, blogRef }}
+        refs={{
+          aboutRef,
+          servicesRef,
+          projectsRef,
+          testimonialsRef,
+          blogRef,
+          footerRef,
+        }}
       />
       <div>
-        <Hero />
+        <Hero
+          scrollToSection={scrollToSection}
+          refs={{
+            aboutRef,
+            servicesRef,
+            projectsRef,
+            testimonialsRef,
+            blogRef,
+            footerRef,
+          }}
+        />
       </div>
       <div ref={aboutRef}>
         <About />
@@ -46,10 +63,19 @@ export default function Home() {
       <div ref={blogRef}>
         <Blog />
       </div>
-      <Footer
-        scrollToSection={scrollToSection}
-        refs={{ aboutRef, servicesRef, projectsRef, testimonialsRef, blogRef }}
-      />
+      <div ref={footerRef}>
+        <Footer
+          scrollToSection={scrollToSection}
+          refs={{
+            aboutRef,
+            servicesRef,
+            projectsRef,
+            testimonialsRef,
+            blogRef,
+            footerRef,
+          }}
+        />
+      </div>
     </div>
   );
 }
