@@ -102,7 +102,7 @@ const Services = () => {
           </div>
 
           <div className="text-center shadow-lg p-10 rounded-xl my-10  w-auto lg:w-[30%]">
-            <Link href="/projects/Tech and IT consultation">
+            <Link href="/projects/Tech and IT Consultation">
               <Image
                 src={Tech_and_IT}
                 alt="design"

@@ -3,6 +3,10 @@ export interface ImageProps {
   alt?: string;
 }
 
+export interface ServiceParamsProps {
+  name?: string;
+}
+
 export interface NavProps {
   scrollToSection?: (sectionRef: React.RefObject<HTMLDivElement>) => void;
   refs?: {
@@ -15,7 +19,7 @@ export interface NavProps {
   };
 }
 
-export interface ProjectDataProps {
+export interface ServiceDataProps {
   service_name: string;
   service_slug: string;
   service_slug_note: string;
@@ -32,8 +36,4 @@ export interface ProjectDataProps {
   };
   service_footer_title: string;
   service_footer_notes: [string, string];
-}
-
-export interface ProjectProps {
-  data: ProjectDataProps;
 }

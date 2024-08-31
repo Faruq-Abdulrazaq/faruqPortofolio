@@ -36,10 +36,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { db } from "@/utils/Firebase";
+import { useRouter } from "next/navigation";
 
 const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   const [isLoading, setIsLoading] = useState("");
-
+  const router = useRouter();
   // Subscribe to me
   const subSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
@@ -124,8 +125,8 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   };
 
   return (
-    <section className="flex items-center flex-col mt-10">
-      <div className="w-full h-[65%] flex justify-around gap-1 flex-col">
+    <section className="flex items-center flex-col mt-10 gap-4">
+      <div className="w-full h-[65%] flex justify-around gap-1 flex-col pb-5">
         <h1 className="text-[35px]  font-bold ml-16">Get in Touch </h1>
         <div className="w-full h-[95%] flex flex-col justify-around gap-5 lg:flex-row">
           <div className="w-auto lg:w-[50%] h-full flex flex-col justify-center items-center gap-5">
@@ -330,13 +331,27 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
           <div className="m-4 flex flex-col">
             <h1 className="font-bold mb-4">General</h1>
             <ul className="text-faruq_secondry flex flex-col gap-2">
-              <li className="cursor-pointer">Home</li>
               <li
-                onClick={() =>
-                  scrollToSection &&
-                  refs?.aboutRef &&
-                  scrollToSection(refs.aboutRef)
-                }
+                onClick={() => {
+                  if (scrollToSection && refs?.aboutRef) {
+                    scrollToSection(refs.aboutRef);
+                  } else {
+                    router.push("/");
+                  }
+                }}
+                className="cursor-pointer"
+              >
+                Home
+              </li>
+
+              <li
+                onClick={() => {
+                  if (scrollToSection && refs?.aboutRef) {
+                    scrollToSection(refs.aboutRef);
+                  } else {
+                    router.push("/");
+                  }
+                }}
                 className="cursor-pointer"
               >
                 About
