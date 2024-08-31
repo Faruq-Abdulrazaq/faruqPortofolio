@@ -16,7 +16,7 @@ const Services = () => {
       </h1>
       <div className="w-auto lg:w-[90%]">
         <div className="flex flex-col lg:flex-row gap-10 justify-center items-center flex-wrap">
-          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%]">
+          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%] hover:opacity-70">
             <Link href="/projects/Custom Software Development">
               <Image
                 src={custom_software}
@@ -37,7 +37,7 @@ const Services = () => {
             </Link>
           </div>
 
-          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%]">
+          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%] hover:opacity-70">
             <Link href="/projects/Automation and AI">
               <Image
                 src={automation}
@@ -59,7 +59,7 @@ const Services = () => {
             </Link>
           </div>
 
-          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%]">
+          <div className="text-center shadow-lg p-10 rounded-xl my-10 w-auto lg:w-[30%] hover:opacity-70">
             <Link href="/projects/Branding Services Description">
               <Image
                 src={brand}
@@ -80,7 +80,7 @@ const Services = () => {
               </p>
             </Link>
           </div>
-          <div className="text-center shadow-lg p-10 rounded-xl my-10  w-auto lg:w-[30%]">
+          <div className="text-center shadow-lg p-10 rounded-xl my-10  w-auto lg:w-[30%] hover:opacity-70">
             <Link href="/projects/Web and Mobile Applications">
               <Image
                 src={web_mobile}
@@ -101,7 +101,7 @@ const Services = () => {
             </Link>
           </div>
 
-          <div className="text-center shadow-lg p-10 rounded-xl my-10  w-auto lg:w-[30%]">
+          <div className="text-center shadow-lg p-10 rounded-xl my-10  w-auto lg:w-[30%] hover:opacity-70">
             <Link href="/projects/Tech and IT Consultation">
               <Image
                 src={Tech_and_IT}
