@@ -11,7 +11,7 @@ const Services = async ({ params }: { params: { name: string } }) => {
   });
 
   return (
-    <section className="w-full items-center flex flex-col justify-center">
+    <section className="w-full flex flex-col justify-center">
       <div className="w-full flex flex-wrap justify-between items-center p-4">
         <div className="flex-shrink-0">
           <Image
