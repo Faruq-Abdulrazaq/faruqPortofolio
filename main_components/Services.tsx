@@ -11,8 +11,7 @@ const Services = () => {
   return (
     <section className="w-full flex flex-col justify-center items-center mt-6">
       <h1 className="mt-10 font-bold text-[25px] text-left lg:text-center w-[350px] lg:w-[1000px]">
-        Let's build a digital future together. Explore my range of software
-        development services.
+        Let's build a digital future together.
       </h1>
       <div className="w-auto lg:w-[90%]">
         <div className="flex flex-col lg:flex-row gap-10 justify-center items-center flex-wrap">
