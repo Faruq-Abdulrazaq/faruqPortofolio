@@ -60,9 +60,6 @@ export default function Home() {
       <div ref={testimonialsRef}>
         <Testimonials />
       </div>
-      <div ref={blogRef}>
-        <Blog />
-      </div>
       <div ref={footerRef}>
         <Footer
           scrollToSection={scrollToSection}

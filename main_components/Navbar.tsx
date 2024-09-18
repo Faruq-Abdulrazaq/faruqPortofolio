@@ -71,14 +71,7 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
         >
           Testimonials
         </Button>
-        <Button
-          onClick={() =>
-            scrollToSection && refs?.blogRef && scrollToSection(refs?.blogRef)
-          }
-          variant="outline"
-        >
-          Blog
-        </Button>
+
         <Button
           onClick={() =>
             scrollToSection &&
@@ -141,15 +134,6 @@ const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
             variant="outline"
           >
             Testimonials
-          </Button>
-          <Button
-            className="m-3"
-            onClick={() =>
-              scrollToSection && refs?.blogRef && scrollToSection(refs?.blogRef)
-            }
-            variant="outline"
-          >
-            Blog
           </Button>
           <Button
             onClick={() =>
