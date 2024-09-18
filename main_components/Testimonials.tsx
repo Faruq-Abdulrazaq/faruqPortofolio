@@ -19,7 +19,7 @@ const Testimonials = () => {
           <div className="w-auto lg:w-[20%] min-h-[350px]  h-[90%] p-3 bg-gray-100 flex flex-col gap-3 items-left justify-start rounded-md">
             <div className="flex flex-col gap-4 ">
               <Image
-                src="/faruq.png"
+                src="/user.png"
                 alt="user image"
                 width={50}
                 height={50}
