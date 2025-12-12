@@ -1,3 +1,4 @@
+// app/page.tsx
 "use client";
 import React, { useRef } from "react";
 import {
@@ -51,9 +52,11 @@ export default function Home() {
       <div ref={aboutRef}>
         <About />
       </div>
+
       <div ref={servicesRef}>
         <Services />
       </div>
+
       <div ref={projectsRef}>
         <Projects />
       </div>

@@ -1,4 +1,5 @@
-"use client"; // This directive tells Next.js to treat this file as a client component
+// main_components/Icons.tsx
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";

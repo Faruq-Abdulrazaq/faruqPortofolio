@@ -1,20 +1,27 @@
+// main_components/Footer.tsx
 "use client";
-
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from "sonner";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  ArrowRight,
+  Heart,
+  Sparkles,
+} from "lucide-react";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -41,10 +48,11 @@ import { useRouter } from "next/navigation";
 const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
   const [isLoading, setIsLoading] = useState("");
   const router = useRouter();
-  // Subscribe to me
+
+  // Subscribe to newsletter schema
   const subSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
-    name: z.string().min(2, { message: "Fullname must be more than 2 leters" }),
+    name: z.string().min(2, { message: "Name must be more than 2 letters" }),
   });
 
   const sub_form = useForm<z.infer<typeof subSchema>>({
@@ -78,15 +86,16 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
 
       if (response.ok) {
         setIsLoading("");
-        toast("Contact created successfully");
+        toast("Successfully subscribed to newsletter!");
+        sub_form.reset();
       }
     } catch (error) {
       setIsLoading("");
-      toast(`Error: , ${error}`);
+      toast(`Error: ${error}`);
     }
   };
 
-  //Contact me
+  // Contact form schema
   const contactSchema = z.object({
     first_name: z.string().min(2, {
       message: "First name must be at least 2 characters.",
@@ -95,8 +104,8 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
       message: "Last name must be at least 2 characters.",
     }),
     email: z.string().email({ message: "Invalid email address" }),
-    message: z.string().min(2, {
-      message: "Message must be at least 2 characters.",
+    message: z.string().min(10, {
+      message: "Message must be at least 10 characters.",
     }),
     service_type: z.string({ required_error: "Please select a service" }),
   });
@@ -111,375 +120,482 @@ const Footer: React.FC<NavProps> = ({ scrollToSection, refs }) => {
       service_type: "",
     },
   });
+
   const handleSubmit = async (values: z.infer<typeof contactSchema>) => {
     setIsLoading("Con");
-
     try {
       const docRef = await addDoc(collection(db, "contacts"), values);
-      toast("Contact sent sucessfully");
+      toast("Message sent successfully!");
+      form.reset();
     } catch (e) {
-      toast(`Error: , ${e}`);
+      toast(`Error: ${e}`);
     }
-
     setIsLoading("");
   };
 
+  const services = [
+    "Custom Software Development",
+    "Fashion & E-commerce Solutions",
+    "Automation and AI",
+    "Web and Mobile Applications",
+    "Restaurant & Food Tech",
+    "Real Estate Technology",
+    "Automotive Solutions",
+    "Tech and IT Consultation",
+    "Others",
+  ];
+
+  const quickLinks = [
+    { label: "Home", action: () => window.scrollTo(0, 0) },
+    { label: "About", ref: refs?.aboutRef },
+    { label: "Services", ref: refs?.servicesRef },
+    { label: "Projects", ref: refs?.projectsRef },
+    { label: "Testimonials", ref: refs?.testimonialsRef },
+  ];
+
+  const socialLinks = [
+    { name: "X (Twitter)", url: "https://x.com/faruq_developer", icon: "🐦" },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/faruq.developer_/",
+      icon: "📸",
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/faruq-taye-abdulrazaq/",
+      icon: "💼",
+    },
+    {
+      name: "TikTok",
+      url: "https://www.tiktok.com/@faruq.developer?lang=en",
+      icon: "🎵",
+    },
+  ];
+
   return (
-    <section className="flex items-center flex-col mt-10 gap-4">
-      <div className="w-full h-[65%] flex justify-around gap-1 flex-col pb-5">
-        <h1 className="text-[35px]  font-bold ml-16">Get in Touch </h1>
-        <div className="w-full h-[95%] flex flex-col justify-around gap-5 lg:flex-row">
-          <div className="w-auto lg:w-[50%] h-full flex flex-col justify-center items-center gap-5">
-            <div className="w-[90%]  p-2">
-              <h3 className="text-[15px] font-bold">
-                Let's Collaborate to Transform Your Vision into Reality
-              </h3>
-              <p className="leading-[1.50rem]">
-                Whether you have a specific project in mind or just want to
-                discuss how innovative technology can drive your business
-                forward, I’m here to help. My expertise in custom software
-                development, automation and AI, web and mobile applications, and
-                IT consultation can provide the solutions you need to achieve
-                your goals.
-              </p>
+    <footer className="relative w-full overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-40 -left-60 w-96 h-96 bg-gradient-to-br from-black/3 via-gray-900/2 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-40 -right-60 w-[600px] h-[600px] bg-gradient-to-bl from-gray-800/3 via-black/2 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="relative z-10 w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
+        {/* Contact Section */}
+        <section className="py-32">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-6 py-3 glass rounded-full backdrop-blur-xl border border-white/20 shadow-lg mb-8">
+              <Sparkles className="w-4 h-4 mr-2 text-gray-600" />
+              <span className="text-sm font-medium text-gray-700">
+                Let&#39;s Connect
+              </span>
             </div>
-            <div className="w-[90%]  p-2">
-              <h3 className="text-[15px] font-bold">Why Reach Out?</h3>
-              <ul className="flex flex-col gap-1">
-                <li>
-                  Tailored Solutions: Receive custom software designed
-                  specifically to meet your business needs.
-                </li>
-                <li>
-                  {" "}
-                  Expert Advice: Benefit from professional IT consultation to
-                  navigate the complexities of technology.
-                </li>
-                <li>
-                  {" "}
-                  Innovative Approaches: Leverage cutting-edge automation and AI
-                  to streamline your operations.
-                </li>
-                <li>
-                  {" "}
-                  User-Centric Design: Get web and mobile applications that
-                  offer seamless and engaging user experiences.
-                </li>
-              </ul>
-            </div>
-            <div className="w-[90%] p-2">
-              <h3 className="text-[15px] font-bold">How Can I Help You?</h3>
-              <ul className="flex flex-col gap-1">
-                <li>
-                  Discuss Your Project: Let's talk about your ideas and how we
-                  can bring them to life.
-                </li>
-                <li>
-                  {" "}
-                  Request a Quote: Get a detailed proposal and quote for your
-                  project requirements.
-                </li>
-                <li>
-                  {" "}
-                  Schedule a Consultation: Book a session to explore your tech
-                  needs and the best solutions.
-                </li>
-              </ul>
-            </div>
-            <div className="w-[90%] p-2">
-              <h3 className="text-[15px] font-bold">Ready to Start?</h3>
-              <p className="leading-[1.50rem]">
-                Reach out today and let's begin a journey of innovation and
-                growth together. Fill out the form below or contact me directly
-                through email or phone.
-              </p>
-            </div>
+
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-black mb-8 tracking-tight">
+              <span className="block">Ready to Transform</span>
+              <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
+                Your Vision?
+              </span>
+            </h2>
+
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+              Let&#39;s collaborate to transform your vision into reality with
+              innovative technology solutions.
+            </p>
           </div>
-          <div className="w-auto lg:w-[50%] h-full flex justify-center items-center">
-            <Card className="w-[750px]">
-              <CardHeader>
-                <CardTitle>Contact me</CardTitle>
-                <CardDescription>
-                  Deploy your new project in one-click.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(handleSubmit)} className="">
-                    <div className="grid w-full items-center gap-4">
-                      <div className="flex flex-col space-y-1.5">
-                        <Label htmlFor="first_name">First name</Label>
+
+          <div className="grid lg:grid-cols-2 gap-20 items-start">
+            {/* Left Content */}
+            <div className="space-y-12">
+              <div className="space-y-8">
+                <div className="glass rounded-3xl p-8 backdrop-blur-xl border border-white/20 shadow-xl">
+                  <h3 className="text-2xl font-bold text-black mb-6">
+                    Why Work With Me?
+                  </h3>
+                  <div className="space-y-6">
+                    {[
+                      {
+                        title: "Tailored Solutions",
+                        description:
+                          "Custom software designed specifically to meet your business needs and goals.",
+                      },
+                      {
+                        title: "Expert Guidance",
+                        description:
+                          "Professional IT consultation to navigate technology complexities with confidence.",
+                      },
+                      {
+                        title: "Cutting-Edge Innovation",
+                        description:
+                          "Leverage latest automation and AI technologies to streamline operations.",
+                      },
+                      {
+                        title: "User-Centric Design",
+                        description:
+                          "Seamless web and mobile applications with engaging user experiences.",
+                      },
+                    ].map((benefit, index) => (
+                      <div key={index} className="flex space-x-4">
+                        <div className="w-2 h-2 bg-black rounded-full mt-3"></div>
+                        <div>
+                          <h4 className="font-semibold text-black mb-1">
+                            {benefit.title}
+                          </h4>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {benefit.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contact Information */}
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-black">
+                    Get In Touch
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 glass rounded-xl flex items-center justify-center backdrop-blur-xl border border-white/20">
+                        <Phone className="w-5 h-5 text-gray-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-black">
+                          +234 807 525 6960
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          Available 9AM - 6PM WAT
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 glass rounded-xl flex items-center justify-center backdrop-blur-xl border border-white/20">
+                        <Mail className="w-5 h-5 text-gray-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-black">
+                          faruqtayeabdulrazaq@gmail.com
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          Response within 24 hours
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 glass rounded-xl flex items-center justify-center backdrop-blur-xl border border-white/20">
+                        <MapPin className="w-5 h-5 text-gray-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-black">Lagos, Nigeria</p>
+                        <p className="text-sm text-gray-500">
+                          Available for remote work globally
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content - Contact Form */}
+            <div>
+              <div className="glass rounded-3xl backdrop-blur-xl border border-white/20 shadow-xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-br from-black/90 to-gray-800/90 text-white p-8">
+                  <CardTitle className="text-2xl font-bold">
+                    Start Your Project
+                  </CardTitle>
+                  <CardDescription className="text-gray-200">
+                    Tell me about your project and let&#39;s bring your ideas to
+                    life.
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="p-8">
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(handleSubmit)}
+                      className="space-y-6"
+                    >
+                      <div className="grid grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
                           name="first_name"
                           render={({ field }) => (
                             <FormItem>
+                              <FormLabel>First Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="First name" {...field} />
+                                <Input
+                                  placeholder="John"
+                                  {...field}
+                                  className="rounded-xl"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-                      </div>
-                      <div className="flex flex-col space-y-1.5">
-                        <Label htmlFor="last_name">Last name</Label>
                         <FormField
                           control={form.control}
                           name="last_name"
                           render={({ field }) => (
                             <FormItem>
+                              <FormLabel>Last Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="Last name" {...field} />
+                                <Input
+                                  placeholder="Doe"
+                                  {...field}
+                                  className="rounded-xl"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
                       </div>
-                      <div className="flex flex-col space-y-1.5">
-                        <Label htmlFor="email">Email</Label>
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
+
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email Address</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="john@example.com"
+                                {...field}
+                                className="rounded-xl"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="service_type"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Service Type</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
                               <FormControl>
-                                <Input placeholder="Email address" {...field} />
+                                <SelectTrigger className="rounded-xl">
+                                  <SelectValue placeholder="Select a service" />
+                                </SelectTrigger>
                               </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      <div className="flex flex-col space-y-1.5">
-                        <Label htmlFor="eessage">Message</Label>
-                        <FormField
-                          control={form.control}
-                          name="message"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl>
-                                <Input placeholder="Message" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      <div className="flex flex-col space-y-1.5">
-                        <FormField
-                          control={form.control}
-                          name="service_type"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Service type</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                                required
-                              >
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select a service" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="Custom_Software_Development">
-                                    Custom Software Development
+                              <SelectContent>
+                                {services.map((service) => (
+                                  <SelectItem
+                                    key={service}
+                                    value={service.replace(/\s+/g, "_")}
+                                  >
+                                    {service}
                                   </SelectItem>
-                                  <SelectItem value="Branding">
-                                    Branding
-                                  </SelectItem>
-                                  <SelectItem value="Automation_and_AI">
-                                    Automation and AI
-                                  </SelectItem>
-                                  <SelectItem value=" Web_and_Mobile_Applications">
-                                    Web and Mobile Applications
-                                  </SelectItem>
-                                  <SelectItem value="Tech_and_IT_consultation">
-                                    Tech and IT consultation
-                                  </SelectItem>
-                                  <SelectItem value="Others">Others</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                    </div>
-                    {isLoading === "Con" ? (
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Project Details</FormLabel>
+                            <FormControl>
+                              <textarea
+                                {...field}
+                                placeholder="Tell me about your project, goals, and requirements..."
+                                className="w-full min-h-[120px] px-3 py-2 text-sm rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
                       <Button
-                        className="bg-faruq_secondry mt-5 w-36 lg:w-auto"
-                        disabled
+                        type="submit"
+                        disabled={isLoading === "Con"}
+                        className="w-full bg-black hover:bg-gray-800 text-white py-6 text-lg rounded-xl font-medium group transition-all duration-300"
                       >
-                        <span className="loader"></span>
+                        {isLoading === "Con" ? (
+                          <div className="flex items-center justify-center">
+                            <div className="loader mr-2"></div>
+                            Sending...
+                          </div>
+                        ) : (
+                          <>
+                            <Send className="mr-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                            Send Message
+                          </>
+                        )}
                       </Button>
-                    ) : (
-                      <Button className="bg-faruq_secondry mt-5">Submit</Button>
-                    )}
+                    </form>
+                  </Form>
+                </CardContent>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Links & Newsletter */}
+        <section className="border-t border-gray-200 py-16">
+          <div className="grid lg:grid-cols-3 gap-12">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-xl font-bold text-black mb-6">Quick Links</h4>
+              <div className="space-y-3">
+                {quickLinks.map((link, index) => (
+                  <button
+                    key={index}
+                    onClick={() =>
+                      link.ref ? scrollToSection?.(link.ref) : link.action?.()
+                    }
+                    className="block text-gray-600 hover:text-black transition-colors duration-200 font-medium"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div>
+              <h4 className="text-xl font-bold text-black mb-6">
+                Connect With Me
+              </h4>
+              <div className="space-y-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 text-gray-600 hover:text-black transition-colors duration-200 font-medium"
+                  >
+                    <span className="text-lg">{social.icon}</span>
+                    <span>{social.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <div className="glass rounded-2xl p-6 backdrop-blur-xl border border-white/20 shadow-lg">
+                <div className="flex items-center mb-4">
+                  <Mail className="w-6 h-6 text-gray-700 mr-3" />
+                  <h4 className="text-lg font-bold text-black">Stay Updated</h4>
+                </div>
+                <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                  Get notified about latest tech insights, project updates, and
+                  industry trends.
+                </p>
+
+                <Form {...sub_form}>
+                  <form
+                    onSubmit={sub_form.handleSubmit(handleSub)}
+                    className="space-y-4"
+                  >
+                    <FormField
+                      control={sub_form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              placeholder="Your name"
+                              {...field}
+                              className="rounded-xl"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={sub_form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              placeholder="your@email.com"
+                              {...field}
+                              className="rounded-xl"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      type="submit"
+                      disabled={isLoading === "Sub"}
+                      className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-xl font-medium group transition-all duration-300"
+                    >
+                      {isLoading === "Sub" ? (
+                        <div className="flex items-center justify-center">
+                          <div className="loader mr-2"></div>
+                          Subscribing...
+                        </div>
+                      ) : (
+                        <>
+                          Subscribe
+                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </>
+                      )}
+                    </Button>
                   </form>
                 </Form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="w-full flex-col lg:flex-row  flex justify-around gap-5 border-t-2">
-        <div className="w-auto lg:w-[40%] h-full flex justify-between mt-4">
-          <div className="m-4 flex flex-col">
-            <h1 className="font-bold mb-4">General</h1>
-            <ul className="text-faruq_secondry flex flex-col gap-2">
-              <li
-                onClick={() => {
-                  if (scrollToSection && refs?.aboutRef) {
-                    scrollToSection(refs.aboutRef);
-                  } else {
-                    router.push("/");
-                  }
-                }}
-                className="cursor-pointer"
-              >
-                Home
-              </li>
+        </section>
 
-              <li
-                onClick={() => {
-                  if (scrollToSection && refs?.aboutRef) {
-                    scrollToSection(refs.aboutRef);
-                  } else {
-                    router.push("/");
-                  }
-                }}
-                className="cursor-pointer"
-              >
-                About
-              </li>
-              <li
-                onClick={() =>
-                  scrollToSection &&
-                  refs?.servicesRef &&
-                  scrollToSection(refs?.servicesRef)
-                }
-                className="cursor-pointer"
-              >
-                Services
-              </li>
-              <li
-                onClick={() =>
-                  scrollToSection &&
-                  refs?.projectsRef &&
-                  scrollToSection(refs?.projectsRef)
-                }
-                className="cursor-pointer"
-              >
-                Projects
-              </li>
-            </ul>
-          </div>
-          <div className="m-4 flex flex-col">
-            <h1 className="font-bold mb-4">Socials</h1>
-            <ul className="text-faruq_secondry flex flex-col gap-2">
-              <a href="https://x.com/faruq_developer" target="_blank">
-                <li>X</li>
-              </a>
-              <a
-                href="https://www.instagram.com/faruq.developer_/"
-                target="_blank"
-              >
-                <li>Instagram</li>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/faruq-taye-abdulrazaq/"
-                target="_blank"
-              >
-                <li>Linkedin</li>
-              </a>
-              <a
-                href="https://www.tiktok.com/@faruq.developer?lang=en"
-                target="_blank"
-              >
-                <li>Tiktok</li>
-              </a>
-            </ul>
-          </div>
-          <div className="m-4 flex flex-col">
-            <h1 className="font-bold mb-4">Contact</h1>
-            <ul className="text-faruq_secondry flex flex-col gap-2">
-              <li>+2348075256960</li>
-              <a href="mailto: faruqtayeabdulrazaq@gmail.com">
-                <li>Email me</li>
-              </a>
-            </ul>
-          </div>
-        </div>
-        <div className="w-auto lg:w-[40%] h-[60%]">
-          <div className="w-[95%] h-full  flex flex-col gap-5 p-6 border-2 m-4 rounded-xl">
-            <div className="flex  items-center">
-              {" "}
-              <Image
-                src="/icons/mail-reception.png"
-                alt="subscribe mail"
-                width={30}
-                height={30}
-              />{" "}
-              <span> Subscribe to my news letter </span>
+        {/* Bottom Footer */}
+        <section className="border-t border-gray-200 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-2">
+              <p className="text-gray-600">
+                © 2024 Faruq Abdulrazaq. Crafted with
+              </p>
+              <Heart className="w-4 h-4 text-red-500 fill-current" />
+              <p className="text-gray-600">in Lagos, Nigeria</p>
             </div>
-            <p>
-              Stay up to date Get notified when I publish something new, and
-              unsubscribe at any time.
-            </p>
-            <div className="flex w-full max-w-sm items-center space-x-2">
-              <Form {...sub_form}>
-                <form
-                  onSubmit={sub_form.handleSubmit(handleSub)}
-                  className="flex flex-col lg:flex-row gap-3 items-start lg:items-center"
-                >
-                  <FormField
-                    control={sub_form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder="Email address" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={sub_form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder="Fullname" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {isLoading === "Sub" ? (
-                    <Button
-                      className="bg-faruq_primary w-36 lg:w-auto"
-                      disabled
-                    >
-                      <span className="loader"></span>
-                    </Button>
-                  ) : (
-                    <Button className="bg-faruq_primary" type="submit">
-                      Subscribe
-                    </Button>
-                  )}
-                </form>
-              </Form>
+            <div className="flex items-center space-x-6 text-sm text-gray-500">
+              <a
+                href="#"
+                className="hover:text-black transition-colors duration-200"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="hover:text-black transition-colors duration-200"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="hover:text-black transition-colors duration-200"
+              >
+                Sitemap
+              </a>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-      <div>&copy;2024 Faruq Abdulrazaq</div>
-    </section>
+    </footer>
   );
 };
 
