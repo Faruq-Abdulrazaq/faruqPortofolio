@@ -1,23 +1,12 @@
-// main_components/index.ts
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Hero from "./Hero";
-import Services from "./Services";
-import Icons from "./Icons";
-import About from "./About";
-import Blog from "./Blog";
-import Projects from "./Projects";
-import Testimonials from "./Testimonials";
-import Main_footer from "./Main_footer";
-export {
-  Navbar,
-  Footer,
-  Hero,
-  Services,
-  Icons,
-  About,
-  Projects,
-  Blog,
-  Testimonials,
-  Main_footer,
-};
+export { default as Navbar } from "./Navbar";
+export { default as Hero } from "./Hero";
+export { default as TrustStrip } from "./TrustStrip";
+export { default as About } from "./About";
+export { default as Experience } from "./Experience";
+export { default as Services } from "./Services";
+export { default as Projects } from "./Projects";
+export { default as Stack } from "./Stack";
+export { default as Testimonials } from "./Testimonials";
+export { default as Contact } from "./Contact";
+export { default as Footer } from "./Footer";
+export { default as Main_footer } from "./Main_footer";

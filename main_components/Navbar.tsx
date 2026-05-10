@@ -1,140 +1,76 @@
-// File: main_components/Navbar.tsx
 "use client";
-import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { NavProps } from "@/types";
-import Image from "next/image";
-import { MenuSquare, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
-const Navbar: React.FC<NavProps> = ({ scrollToSection, refs }) => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const current = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
+    setTheme(current ?? "dark");
   }, []);
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
-  };
-
-  const navItems = [
-    { label: "Home", action: () => window.scrollTo(0, 0) },
-    { label: "About", ref: refs?.aboutRef },
-    { label: "Services", ref: refs?.servicesRef },
-    { label: "Projects", ref: refs?.projectsRef },
-    { label: "Testimonials", ref: refs?.testimonialsRef },
-  ];
+  function toggleTheme() {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200/20"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0 transform hover:scale-105 transition-transform duration-200">
-            <Image
-              className="w-16 h-8 lg:w-18 lg:h-12"
-              src="/faruq_logo_main.png"
-              alt="Faruq Abdulrazaq Logo"
-              width={80}
-              height={54}
-            />
-          </div>
+    <nav className="nav">
+      <div className="container nav-inner">
+        <a className="brand" href="#top" aria-label="Faruq Abdulrazaq home">
+          <span className="brand-name">Faruq Abdulrazaq</span>
+          <span className="brand-suffix">/ platform.eng</span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item, index) => (
-              <Button
-                key={index}
-                onClick={() =>
-                  item.ref ? scrollToSection?.(item.ref) : item.action?.()
-                }
-                variant="ghost"
-                className="text-gray-700 hover:text-black hover:bg-gray-100/50 font-medium px-4 py-2 rounded-lg transition-all duration-200"
-              >
-                {item.label}
-              </Button>
-            ))}
-            <Button
-              onClick={() => scrollToSection?.(refs?.footerRef!)}
-              className="ml-4 bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Contact Me
-            </Button>
-          </div>
+        <div className={`nav-links${menuOpen ? " open" : ""}`}>
+          <a className="nav-link" href="#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a className="nav-link" href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+          <a className="nav-link" href="#work" onClick={() => setMenuOpen(false)}>Work</a>
+          <a className="nav-link" href="#stack" onClick={() => setMenuOpen(false)}>Stack</a>
+          <a className="nav-link" href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleDrawer}
-              className="text-gray-700 hover:text-black"
-            >
-              <MenuSquare className="w-6 h-6" />
-            </Button>
-          </div>
+        <div className="nav-right">
+          <span className="status-pill nav-status">
+            <span className="status-dot" />
+            <span>available · jun 2026</span>
+          </span>
+
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === "dark" ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            ) : (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
+
+          <button
+            className="nav-burger"
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            )}
+          </button>
         </div>
       </div>
-
-      {/* Mobile Drawer */}
-      {drawerOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-            onClick={toggleDrawer}
-          />
-          <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300">
-            <div className="flex flex-col h-full">
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-lg font-semibold">Menu</h3>
-                <Button variant="ghost" size="icon" onClick={toggleDrawer}>
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              <div className="flex-1 py-6">
-                {navItems.map((item, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => {
-                      item.ref ? scrollToSection?.(item.ref) : item.action?.();
-                      toggleDrawer();
-                    }}
-                    variant="ghost"
-                    className="w-full justify-start px-6 py-4 text-left text-gray-700 hover:text-black hover:bg-gray-50"
-                  >
-                    {item.label}
-                  </Button>
-                ))}
-                <div className="px-6 mt-6">
-                  <Button
-                    onClick={() => {
-                      scrollToSection?.(refs?.footerRef!);
-                      toggleDrawer();
-                    }}
-                    className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-lg font-medium"
-                  >
-                    Contact Me
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
     </nav>
   );
-};
-
-export default Navbar;
+}

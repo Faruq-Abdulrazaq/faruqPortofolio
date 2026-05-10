@@ -1,242 +1,128 @@
-// File: main_components/Services.tsx
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Sparkles, ExternalLink } from "lucide-react";
-
-const Services = () => {
-  const services = [
-    {
-      title: "Fashion & Clothing",
-      subtitle: "StitchTech Solutions",
-      description:
-        "Revolutionize your fashion business with cutting-edge e-commerce platforms, inventory management systems, and AI-powered recommendation engines.",
-      icon: "/fashion-woman-svgrepo-com.png",
-      link: "/StitchTech",
-      features: [
-        "E-commerce Platforms",
-        "Inventory Management",
-        "AI Recommendations",
-        "Brand Analytics",
-      ],
-      color: "from-black/90 to-gray-800/90",
-      accent: "bg-white/10",
-    },
-    {
-      title: "Custom Software Development",
-      subtitle: "Tailored Solutions",
-      description:
-        "Bespoke software solutions designed specifically for your business needs, ensuring scalability, security, and seamless user experience.",
-      icon: "/icons/python.png",
-      link: "/CodeCraft",
-      features: [
-        "Web Applications",
-        "Mobile Apps",
-        "Desktop Software",
-        "API Development",
-      ],
-      color: "from-gray-800/90 to-gray-900/90",
-      accent: "bg-white/10",
-    },
-    {
-      title: "Automation & AI",
-      subtitle: "Intelligent Systems",
-      description:
-        "Transform your operations with AI-powered automation solutions that reduce costs, eliminate errors, and boost productivity exponentially.",
-      icon: "/icons/react.png",
-      link: "/Frameworks",
-      features: [
-        "Process Automation",
-        "AI Integration",
-        "Machine Learning",
-        "Data Analytics",
-      ],
-      color: "from-gray-700/90 to-black/90",
-      accent: "bg-white/10",
-    },
-    {
-      title: "Restaurant & Food Tech",
-      subtitle: "Digital Kitchen Solutions",
-      description:
-        "Complete digital transformation for restaurants with smart ordering systems, kitchen automation, and comprehensive customer analytics.",
-      icon: "/fast-food-svgrepo-com.png",
-      link: "/BiteCode",
-      features: [
-        "Online Ordering",
-        "Kitchen Management",
-        "Delivery Systems",
-        "Customer Analytics",
-      ],
-      color: "from-black/90 to-gray-700/90",
-      accent: "bg-white/10",
-    },
-    {
-      title: "Real Estate Tech",
-      subtitle: "Property Solutions",
-      description:
-        "Modern real estate platforms featuring property management, virtual tours, automated valuations, and intelligent matching systems.",
-      icon: "/real-estate-market-svgrepo-com.png",
-      link: "/KeyNest",
-      features: [
-        "Property Management",
-        "Virtual Tours",
-        "CRM Systems",
-        "Market Analytics",
-      ],
-      color: "from-gray-900/90 to-gray-800/90",
-      accent: "bg-white/10",
-    },
-    {
-      title: "Automotive Solutions",
-      subtitle: "Car Sales & Rental",
-      description:
-        "Comprehensive automotive platforms for sales, rentals, fleet management, and customer relationship optimization.",
-      icon: "/car-svgrepo-com.png",
-      link: "/DriveLogic",
-      features: [
-        "Fleet Management",
-        "Booking Systems",
-        "Sales Platforms",
-        "Maintenance Tracking",
-      ],
-      color: "from-gray-800/90 to-black/90",
-      accent: "bg-white/10",
-    },
-  ];
-
+export default function Services() {
   return (
-    <section className="relative w-full py-32 overflow-hidden">
-      {/* Background with liquid glass effect */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50"></div>
-
-      {/* Liquid glass background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-40 -left-60 w-96 h-96 bg-gradient-to-br from-black/3 via-gray-900/2 to-transparent rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-40 -right-60 w-[600px] h-[600px] bg-gradient-to-bl from-gray-800/3 via-black/2 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-transparent via-black/1 to-transparent rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
-      <div className="relative z-10 w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-6 py-3 glass rounded-full backdrop-blur-xl border border-white/20 shadow-lg mb-8">
-            <Sparkles className="w-4 h-4 mr-2 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">
-              Services & Solutions
-            </span>
-          </div>
-
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-black mb-8 tracking-tight">
-            Building Digital
-            <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-              Futures Together
-            </span>
-          </h2>
-
-          <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-            Explore my range of specialized services designed to transform your
-            business with cutting-edge technology solutions.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10 mb-20">
-          {services.map((service, index) => (
-            <Link key={index} href={service.link} className="group">
-              <div className="relative h-full glass rounded-3xl p-8 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden card-hover">
-                {/* Background gradient overlay */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`}
-                ></div>
-
-                {/* Subtle glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent rounded-3xl"></div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-8">
-                    <div
-                      className={`w-16 h-16 ${service.accent} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm`}
-                    >
-                      <Image
-                        src={service.icon}
-                        alt={service.title}
-                        width={32}
-                        height={32}
-                        className="w-8 h-8"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Text Content */}
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-2xl font-bold text-black mb-2 group-hover:text-white transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm font-medium text-gray-500 group-hover:text-gray-200 transition-colors duration-300">
-                        {service.subtitle}
-                      </p>
-                    </div>
-
-                    <p className="text-gray-600 group-hover:text-gray-100 leading-relaxed transition-colors duration-300">
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <div className="space-y-3">
-                      {service.features.slice(0, 3).map((feature, idx) => (
-                        <div key={idx} className="flex items-center space-x-3">
-                          <div className="w-1.5 h-1.5 bg-black group-hover:bg-white rounded-full transition-colors duration-300"></div>
-                          <span className="text-sm text-gray-700 group-hover:text-gray-200 transition-colors duration-300 font-medium">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                      {service.features.length > 3 && (
-                        <div className="flex items-center space-x-3">
-                          <div className="w-1.5 h-1.5 bg-black group-hover:bg-white rounded-full transition-colors duration-300"></div>
-                          <span className="text-sm text-gray-700 group-hover:text-gray-200 transition-colors duration-300 font-medium">
-                            +{service.features.length - 3} more solutions
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="flex items-center justify-between pt-6">
-                      <div className="flex items-center text-black group-hover:text-white font-medium transition-colors duration-300">
-                        <span className="mr-2">Explore Solutions</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                      </div>
-                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-200 transition-colors duration-300" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hover border effect */}
-                <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-white/20 transition-colors duration-300"></div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center">
-          <div className="inline-block glass rounded-2xl p-1 backdrop-blur-xl border border-white/20 shadow-lg">
-            <Link
-              href="/services"
-              className="inline-flex items-center px-8 py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-800 transition-all duration-300 group"
-            >
-              <span className="mr-2">View All Services</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-          </div>
+    <div className="container">
+      <div className="section-head">
+        <div className="hl">
+          <span className="eyebrow">03 · SPECIALIZATIONS</span>
+          <h2>What I build.</h2>
+          <p>Four practice areas where I deliver enterprise-grade systems — from CI/CD automation to full stack operational platforms.</p>
         </div>
       </div>
-    </section>
+
+      <div className="svc-grid">
+        {/* A */}
+        <article className="svc">
+          <div className="svc-key">A · INFRA &amp; DEVOPS AUTOMATION</div>
+          <h3>Pipelines &amp; deployment automation that hold up in production.</h3>
+          <p>CI/CD workflows, GitLab pipelines, runners, and operational automation tooling that ship deterministically.</p>
+          <ul className="svc-list">
+            <li>CI/CD workflows</li><li>GitLab pipelines</li>
+            <li>Automation tooling</li><li>Operational automation</li>
+            <li>Deployment workflows</li><li>Runner orchestration</li>
+          </ul>
+          <div className="svc-viz">
+            <svg viewBox="0 0 360 80" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
+              <g stroke="#2a313e" strokeWidth="1" fill="none">
+                <path d="M20 40 L100 40 L140 40 L220 40 L260 40 L340 40"/>
+              </g>
+              <circle r="3" fill="#fb923c"><animateMotion dur="3s" repeatCount="indefinite" path="M20 40 L340 40"/></circle>
+              <g><rect x="10" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#2a313e"/><text x="21" y="44" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">src</text></g>
+              <g><rect x="90" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#2a313e"/><text x="101" y="44" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">ci</text></g>
+              <g><rect x="130" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#2a313e"/><text x="141" y="44" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">tst</text></g>
+              <g><rect x="210" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#fb923c"/><text x="221" y="44" fill="#fb923c" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">scn</text></g>
+              <g><rect x="250" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#2a313e"/><text x="261" y="44" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">dpl</text></g>
+              <g><rect x="328" y="30" width="22" height="20" rx="3" fill="#141821" stroke="#34d399"/><text x="339" y="44" fill="#34d399" fontFamily="IBM Plex Mono" fontSize="8" textAnchor="middle">rls</text></g>
+            </svg>
+          </div>
+        </article>
+
+        {/* B */}
+        <article className="svc">
+          <div className="svc-key">B · KUBERNETES &amp; PLATFORM</div>
+          <h3>Cluster operations &amp; cloud-native tooling.</h3>
+          <p>Backup &amp; recovery automation, container orchestration, and platform engineering for production-grade Kubernetes.</p>
+          <ul className="svc-list">
+            <li>Backup / recovery</li><li>Cluster operations</li>
+            <li>Container orchestration</li><li>Cloud-native tooling</li>
+            <li>Velero workflows</li><li>HA &amp; DR strategy</li>
+          </ul>
+          <div className="svc-viz">
+            <svg viewBox="0 0 360 80" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+              <g transform="translate(20 18)">
+                {[0,20,40,60,80,100,120,140,160,180].map((x, i) => (
+                  <rect key={`r1-${i}`} x={x} width="14" height="14" rx="2" fill="#0a0c10" stroke={i === 4 ? "#fb923c" : "#34d399"}/>
+                ))}
+                {[0,20,40,60,80,100,120,140,160,180].map((x, i) => (
+                  <rect key={`r2-${i}`} x={x} y="20" width="14" height="14" rx="2" fill="#0a0c10" stroke={i === 6 ? "#fbbf24" : "#34d399"}>
+                    {i === 6 && <animate attributeName="stroke" values="#34d399;#fbbf24;#34d399" dur="2.4s" repeatCount="indefinite"/>}
+                  </rect>
+                ))}
+              </g>
+              <text x="240" y="38" fill="#f3f4f6" fontFamily="IBM Plex Mono" fontSize="11">backup</text>
+              <text x="240" y="54" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="9">velero · 18h ago</text>
+              <text x="320" y="38" fill="#fb923c" fontFamily="IBM Plex Mono" fontSize="11" textAnchor="end">100%</text>
+            </svg>
+          </div>
+        </article>
+
+        {/* C */}
+        <article className="svc">
+          <div className="svc-key">C · ENTERPRISE AUTOMATION</div>
+          <h3>Internal systems that turn ops chaos into routine.</h3>
+          <p>Credential rotation, audit-ready workflows, and the internal engineering tools that quiet on-call rotations.</p>
+          <ul className="svc-list">
+            <li>Credential rotation</li><li>Operational workflows</li>
+            <li>Internal eng tools</li><li>Audit-ready systems</li>
+            <li>Approval pipelines</li><li>Compliance reporting</li>
+          </ul>
+          <div className="svc-viz">
+            <svg viewBox="0 0 360 80" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+              <g transform="translate(180 40)">
+                <circle r="22" fill="none" stroke="#2a313e" strokeWidth="1"/>
+                <circle r="22" fill="none" stroke="#fb923c" strokeWidth="1.5" strokeDasharray="138" strokeDashoffset="38" transform="rotate(-90)">
+                  <animate attributeName="strokeDashoffset" values="138;0;138" dur="6s" repeatCount="indefinite"/>
+                </circle>
+                <text y="4" fill="#fb923c" fontFamily="IBM Plex Mono" fontSize="11" textAnchor="middle" fontWeight="600">↻</text>
+              </g>
+              <g fontFamily="IBM Plex Mono" fontSize="9" fill="#5b6473">
+                <text x="40" y="28">nsx-t</text><circle cx="34" cy="25" r="2.5" fill="#34d399"/>
+                <text x="40" y="46">harbor</text><circle cx="34" cy="43" r="2.5" fill="#34d399"/>
+                <text x="40" y="64">ops-dash</text><circle cx="34" cy="61" r="2.5" fill="#fbbf24"/>
+                <text x="320" y="28" textAnchor="end">mysql</text><circle cx="328" cy="25" r="2.5" fill="#5b6473"/>
+                <text x="320" y="46" textAnchor="end">vault</text><circle cx="328" cy="43" r="2.5" fill="#34d399"/>
+                <text x="320" y="64" textAnchor="end">redhat</text><circle cx="328" cy="61" r="2.5" fill="#5b6473"/>
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        {/* D */}
+        <article className="svc">
+          <div className="svc-key">D · FULL STACK ENGINEERING</div>
+          <h3>Modern web apps &amp; operational platforms.</h3>
+          <p>Internal dashboards, API systems, and operator-facing platforms with the polish your team will actually use.</p>
+          <ul className="svc-list">
+            <li>Modern web apps</li><li>Internal dashboards</li>
+            <li>Operational platforms</li><li>API systems</li>
+            <li>Design-led UX</li><li>Realtime &amp; SSE</li>
+          </ul>
+          <div className="svc-viz">
+            <svg viewBox="0 0 360 80" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%" }}>
+              <g>
+                <rect x="20" y="14" width="320" height="14" rx="3" fill="#141821" stroke="#2a313e"/>
+                <rect x="22" y="16" width="8" height="10" rx="2" fill="#34d399"/>
+                <text x="36" y="24" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="9">/api/services · 200 OK · 18ms</text>
+                <rect x="20" y="34" width="320" height="14" rx="3" fill="#141821" stroke="#2a313e"/>
+                <rect x="22" y="36" width="8" height="10" rx="2" fill="#34d399"/>
+                <text x="36" y="44" fill="#5b6473" fontFamily="IBM Plex Mono" fontSize="9">/api/credentials · 200 OK · 24ms</text>
+                <rect x="20" y="54" width="320" height="14" rx="3" fill="#141821" stroke="#fb923c"/>
+                <rect x="22" y="56" width="8" height="10" rx="2" fill="#fb923c"/>
+                <text x="36" y="64" fill="#fb923c" fontFamily="IBM Plex Mono" fontSize="9">/api/rotate · 202 ACCEPTED · 31ms</text>
+              </g>
+            </svg>
+          </div>
+        </article>
+      </div>
+    </div>
   );
-};
-
-export default Services;
+}

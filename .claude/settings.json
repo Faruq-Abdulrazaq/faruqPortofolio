@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /b \"c:\\\\projects\\\\faruqPortofolio\\\\app\")",
+      "Bash(git checkout *)",
+      "Bash(cd \"c:\\\\projects\\\\faruqPortofolio\" && rm -rf app/BiteCode app/CodeCraft app/DriveLogic app/Frameworks app/KeyNest app/StitchTech)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp webfetch-1778361464671-4afn0l.bin design.gz)",
+      "Bash(gunzip design.gz)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\NPC-ICT\\\\.claude\\\\projects\\\\c--projects-faruqPortofolio\\\\ed3918b4-7164-46a5-b0e7-582b24f02690\\\\tool-results\\\\extracted\")",
+      "Bash(tar -xf \"C:\\\\Users\\\\NPC-ICT\\\\.claude\\\\projects\\\\c--projects-faruqPortofolio\\\\ed3918b4-7164-46a5-b0e7-582b24f02690\\\\tool-results\\\\design\" -C \"C:\\\\Users\\\\NPC-ICT\\\\.claude\\\\projects\\\\c--projects-faruqPortofolio\\\\ed3918b4-7164-46a5-b0e7-582b24f02690\\\\tool-results\\\\extracted\")",
+      "Bash(mkdir -p /c/Users/NPC-ICT/.claude/projects/c--projects-faruqPortofolio/ed3918b4-7164-46a5-b0e7-582b24f02690/tool-results/extracted)",
+      "Bash(tar -xf /c/Users/NPC-ICT/.claude/projects/c--projects-faruqPortofolio/ed3918b4-7164-46a5-b0e7-582b24f02690/tool-results/design -C /c/Users/NPC-ICT/.claude/projects/c--projects-faruqPortofolio/ed3918b4-7164-46a5-b0e7-582b24f02690/tool-results/extracted)",
+      "Read(//c/Users/NPC-ICT/.claude/projects/c--projects-faruqPortofolio/ed3918b4-7164-46a5-b0e7-582b24f02690/tool-results/extracted/**)",
+      "Bash(xargs head -20)",
+      "Bash(npx next *)",
+      "Bash(dir \"c:\\\\projects\\\\faruqPortofolio\" /b)",
+      "Bash(git add *)"
+    ],
+    "additionalDirectories": [
+      "c:\\projects\\faruqPortofolio\\app\\BiteCode"
+    ]
+  }
+}

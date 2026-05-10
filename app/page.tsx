@@ -1,81 +1,51 @@
-// app/page.tsx
-"use client";
-import React, { useRef } from "react";
-import {
-  About,
-  Blog,
-  Footer,
-  Hero,
-  Navbar,
-  Projects,
-  Services,
-  Testimonials,
-} from "@/main_components";
+import Navbar from "@/main_components/Navbar";
+import Hero from "@/main_components/Hero";
+import TrustStrip from "@/main_components/TrustStrip";
+import About from "@/main_components/About";
+import Experience from "@/main_components/Experience";
+import Services from "@/main_components/Services";
+import Projects from "@/main_components/Projects";
+import Stack from "@/main_components/Stack";
+import Testimonials from "@/main_components/Testimonials";
+import Contact from "@/main_components/Contact";
+import Footer from "@/main_components/Footer";
 
 export default function Home() {
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
-  const blogRef = useRef<HTMLDivElement>(null);
-  const footerRef = useRef<HTMLDivElement>(null);
-  const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
-    sectionRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div className="p-4 mx-auto">
-      <Navbar
-        scrollToSection={scrollToSection}
-        refs={{
-          aboutRef,
-          servicesRef,
-          projectsRef,
-          testimonialsRef,
-          blogRef,
-          footerRef,
-        }}
-      />
-      <div>
-        <Hero
-          scrollToSection={scrollToSection}
-          refs={{
-            aboutRef,
-            servicesRef,
-            projectsRef,
-            testimonialsRef,
-            blogRef,
-            footerRef,
-          }}
-        />
-      </div>
-      <div ref={aboutRef}>
-        <About />
-      </div>
-
-      <div ref={servicesRef}>
-        <Services />
-      </div>
-
-      <div ref={projectsRef}>
-        <Projects />
-      </div>
-      <div ref={testimonialsRef}>
-        <Testimonials />
-      </div>
-      <div ref={footerRef}>
-        <Footer
-          scrollToSection={scrollToSection}
-          refs={{
-            aboutRef,
-            servicesRef,
-            projectsRef,
-            testimonialsRef,
-            blogRef,
-            footerRef,
-          }}
-        />
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <main id="top">
+        <Hero />
+        <TrustStrip />
+        <section className="section" id="about">
+          <About />
+        </section>
+        <div className="rule" />
+        <section className="section" id="experience">
+          <Experience />
+        </section>
+        <div className="rule" />
+        <section className="section" id="services">
+          <Services />
+        </section>
+        <div className="rule" />
+        <section className="section" id="work">
+          <Projects />
+        </section>
+        <div className="rule" />
+        <section className="section" id="stack">
+          <Stack />
+        </section>
+        <div className="rule" />
+        <section className="section" id="testimonials">
+          <Testimonials />
+        </section>
+        <div className="rule" />
+        <section className="section" id="contact">
+          <Contact />
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

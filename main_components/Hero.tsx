@@ -1,219 +1,1207 @@
-// File: main_components/Hero.tsx
 "use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { NavProps } from "@/types";
-import { ArrowRight, Download, Sparkles } from "lucide-react";
+import { useState } from "react";
 
-const Hero: React.FC<NavProps> = ({ scrollToSection, refs }) => {
-  const socialLinks = [
-    {
-      icon: "/icons/linkedin.png",
-      alt: "LinkedIn",
-      href: "https://www.linkedin.com/in/faruq-taye-abdulrazaq/",
-    },
-    { icon: "/icons/github.png", alt: "GitHub", href: "#" },
-    { icon: "/icons/fiverr.png", alt: "Fiverr", href: "#" },
-    { icon: "/icons/upwork.png", alt: "Upwork", href: "#" },
-  ];
+type Viz = "pipeline" | "cluster" | "terminal";
 
-  const techStack = [
-    { name: "React", icon: "/icons/react.png" },
-    { name: "Python", icon: "/icons/python.png" },
-    { name: "TypeScript", icon: "/icons/typescript.png" },
-    { name: "AWS", icon: "/icons/aws.png" },
-    { name: "Docker", icon: "/icons/docker.png" },
-    { name: "JavaScript", icon: "/icons/js.png" },
-  ];
+const VIZ_META: Record<Viz, { name: string; status: string }> = {
+  pipeline: { name: "platform/pipeline", status: "running" },
+  cluster: { name: "platform/cluster", status: "healthy" },
+  terminal: { name: "platform/ops", status: "live" },
+};
+
+export default function Hero() {
+  const [activeViz, setActiveViz] = useState<Viz>("pipeline");
+  const meta = VIZ_META[activeViz];
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
-      {/* Liquid Glass Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Primary liquid glass blob */}
-        <div className="absolute top-20 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-black/5 via-gray-900/3 to-transparent blur-3xl animate-pulse"></div>
-
-        {/* Secondary liquid glass blob */}
-        <div className="absolute bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-tr from-gray-800/4 via-black/3 to-transparent blur-3xl animate-pulse delay-1000"></div>
-
-        {/* Tertiary accent blob */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-transparent via-black/2 to-transparent blur-3xl animate-pulse delay-500"></div>
-      </div>
-
-      {/* Floating Tech Icons - Apple Style */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {techStack.map((tech, index) => (
-          <div
-            key={index}
-            className="absolute animate-float opacity-10 hover:opacity-30 transition-opacity duration-700"
-            style={{
-              top: `${15 + index * 12}%`,
-              left: `${5 + (index % 2) * 85}%`,
-              animationDelay: `${index * 0.8}s`,
-              animationDuration: `${6 + index}s`,
-            }}
-          >
-            <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-2xl">
-              <Image src={tech.icon} alt={tech.name} width={28} height={28} />
+    <section className="hero">
+      <div className="container">
+        <div className="hero-grid">
+          {/* Left — copy */}
+          <div>
+            <div className="hero-eyebrow-row">
+              <span className="eyebrow">
+                PLATFORM · AUTOMATION · INFRASTRUCTURE
+              </span>
+            </div>
+            <h1>
+              Building automation &amp; platform{" "}
+              <span className="stroke">solutions</span> that{" "}
+              <span className="accent">scale</span>.
+            </h1>
+            <p className="lead hero-sub">
+              Automation Engineer and Full Stack Developer focused on
+              infrastructure automation, Kubernetes operations, DevOps tooling,
+              and enterprise software systems.
+            </p>
+            <div className="hero-cta-row">
+              <a className="btn btn-primary" href="#work">
+                <span>View projects</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a className="btn btn-ghost" href="#contact">
+                Let&apos;s work together
+              </a>
+            </div>
+            <div className="hero-meta">
+              <span>
+                <b>5+</b> &nbsp;years building platforms
+              </span>
+              <span>
+                <b>8+</b> &nbsp;automation systems shipped
+              </span>
+              <span className="mono" style={{ color: "var(--text-4)" }}>
+                ━━━
+              </span>
+              <span>Lagos &nbsp;/&nbsp; remote</span>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center pt-20">
-        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 pt-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
-            {/* Left Content */}
-            <div className="space-y-8 lg:pr-12">
-              {/* Status Badge */}
-              <div className="inline-flex items-center px-6 py-3 glass rounded-full backdrop-blur-xl border border-white/20 shadow-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">
-                  Available for Projects
+          {/* Right — viz frame */}
+          <div>
+            <div className="viz-frame">
+              <div className="viz-toolbar">
+                <span className="lights" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
                 </span>
-                <Sparkles className="w-4 h-4 ml-2 text-gray-500" />
-              </div>
-
-              {/* Main Heading */}
-              <div className="space-y-6">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight">
-                  <span className="block text-gray-400 font-light">
-                    Hi, I&#39;m
-                  </span>
-                  <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                    Faruq
-                  </span>
-                  <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                    Abdulrazaq
-                  </span>
-                </h1>
-
-                <div className="space-y-3">
-                  <p className="text-2xl lg:text-3xl font-light text-gray-600">
-                    Software Engineer
-                  </p>
-                  <p className="text-lg lg:text-xl text-gray-500 max-w-2xl leading-relaxed">
-                    Creating scalable solutions that drive growth and
-                    efficiency. I specialize in developing innovative software
-                    that transforms businesses through technology.
-                  </p>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button
-                  onClick={() => scrollToSection?.(refs?.footerRef!)}
-                  className="bg-black/90 hover:bg-black text-white px-8 py-6 text-lg rounded-2xl font-medium group transition-all duration-300 backdrop-blur-xl border border-white/10 shadow-2xl btn-hover-lift"
-                >
-                  Let&#39;s Work Together
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Button>
-
-                <Button
-                  variant="outline"
-                  className="glass border-2 border-gray-200 hover:border-black/20 text-gray-700 hover:text-black px-8 py-6 text-lg rounded-2xl font-medium group transition-all duration-300 backdrop-blur-xl shadow-lg btn-hover-lift"
-                  asChild
-                >
-                  <a
-                    href="https://firebasestorage.googleapis.com/v0/b/faruqportfolio.appspot.com/o/FARUQ%20TAYE%20ABDULRAZAQ%20_%20SOFTWARE%20ENGINEER.docx?alt=media&token=dd7f877d-73f6-4340-9eff-41f254fa7fa8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Download className="mr-2 w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300" />
-                    Download Resume
-                  </a>
-                </Button>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex items-center space-x-6 pt-8">
-                <span className="text-sm text-gray-500 font-medium">
-                  Connect:
+                <span className="path">
+                  ~/<span className="seg">{meta.name}</span>.observe
                 </span>
-                <div className="flex space-x-4">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 glass rounded-xl flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+                <div className="viz-switcher">
+                  {(["pipeline", "cluster", "terminal"] as Viz[]).map((v) => (
+                    <button
+                      key={v}
+                      className={activeViz === v ? "on" : ""}
+                      onClick={() => setActiveViz(v)}
                     >
-                      <Image
-                        src={social.icon}
-                        alt={social.alt}
-                        width={20}
-                        height={20}
-                      />
-                    </a>
+                      {v}
+                    </button>
                   ))}
                 </div>
+                <span className="badge">
+                  <span className="dot" />
+                  <span>{meta.status}</span>
+                </span>
               </div>
-            </div>
 
-            {/* Right Content - Image */}
-            <div className="relative lg:pl-12">
-              <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
-                {/* Background Glass Effects */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-gray-600/5 rounded-[3rem] rotate-6 scale-105 blur-xl"></div>
-                <div className="absolute inset-0 bg-gradient-to-bl from-gray-900/5 via-transparent to-black/5 rounded-[3rem] -rotate-6 scale-105 blur-xl"></div>
-
-                {/* Main Image Container */}
-                <div className="relative glass rounded-[3rem] p-8 backdrop-blur-xl border border-white/20 shadow-2xl overflow-hidden">
-                  {/* Inner glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent rounded-[3rem]"></div>
-
-                  <div className="relative">
-                    <Image
-                      src="/faruq.png"
-                      alt="Faruq Abdulrazaq"
-                      width={500}
-                      height={600}
-                      className="w-full h-auto rounded-2xl shadow-lg"
-                      priority
+              <div className="viz-stage">
+                {/* VIZ 1: PIPELINE / DAG */}
+                <svg
+                  className={`viz${activeViz === "pipeline" ? " active" : ""}`}
+                  viewBox="0 0 800 360"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%" stopColor="#fb923c" stopOpacity={0} />
+                      <stop
+                        offset="50%"
+                        stopColor="#fb923c"
+                        stopOpacity={0.9}
+                      />
+                      <stop offset="100%" stopColor="#fb923c" stopOpacity={0} />
+                    </linearGradient>
+                    <pattern
+                      id="dotgrid"
+                      width="20"
+                      height="20"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <circle
+                        cx="1"
+                        cy="1"
+                        r="0.6"
+                        fill="rgba(255,255,255,0.06)"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect
+                    x="0"
+                    y="0"
+                    width="800"
+                    height="360"
+                    fill="url(#dotgrid)"
+                  />
+                  <g stroke="#2a313e" strokeWidth="1.5" fill="none">
+                    <path d="M120 90 L240 90" />
+                    <path d="M320 90 L440 90" />
+                    <path d="M520 90 L640 90" />
+                    <path d="M120 200 L240 200" />
+                    <path d="M320 200 L440 200" />
+                    <path d="M520 200 L640 200" />
+                    <path d="M280 90 Q280 150 280 200" />
+                    <path d="M480 90 Q480 150 480 200" />
+                    <path d="M680 90 Q700 150 720 290" />
+                    <path d="M680 200 Q700 240 720 290" />
+                  </g>
+                  <circle r="3.5" fill="#fb923c">
+                    <animateMotion
+                      dur="3.2s"
+                      repeatCount="indefinite"
+                      path="M40 90 L240 90 L320 90 L440 90 L520 90 L640 90 L720 290"
                     />
+                  </circle>
+                  <circle r="3" fill="#fb923c" opacity="0.6">
+                    <animateMotion
+                      dur="3.2s"
+                      begin="-1.6s"
+                      repeatCount="indefinite"
+                      path="M40 200 L240 200 L320 200 L440 200 L520 200 L640 200 L720 290"
+                    />
+                  </circle>
+                  <circle r="2.5" fill="#34d399">
+                    <animateMotion
+                      dur="3.2s"
+                      begin="-0.6s"
+                      repeatCount="indefinite"
+                      path="M40 90 L240 90 L320 90 L440 90 L520 90 L640 90 L720 290"
+                    />
+                  </circle>
+                  {/* Row 1 */}
+                  <g className="node">
+                    <rect
+                      x="40"
+                      y="68"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="54" cy="90" r="4" fill="#34d399" />
+                    <text
+                      x="64"
+                      y="86"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      source
+                    </text>
+                    <text
+                      x="64"
+                      y="100"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      git pull
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="240"
+                      y="68"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="254" cy="90" r="4" fill="#34d399" />
+                    <text
+                      x="264"
+                      y="86"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      build
+                    </text>
+                    <text
+                      x="264"
+                      y="100"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      2.4s
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="440"
+                      y="68"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="454" cy="90" r="4" fill="#fbbf24">
+                      <animate
+                        attributeName="opacity"
+                        values="1;0.3;1"
+                        dur="1.4s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    <text
+                      x="464"
+                      y="86"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      test
+                    </text>
+                    <text
+                      x="464"
+                      y="100"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      142/180
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="640"
+                      y="68"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#fb923c"
+                    />
+                    <circle cx="654" cy="90" r="4" fill="#fb923c" />
+                    <text
+                      x="664"
+                      y="86"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      scan
+                    </text>
+                    <text
+                      x="664"
+                      y="100"
+                      fill="#fb923c"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      → deploy
+                    </text>
+                  </g>
+                  {/* Row 2 */}
+                  <g className="node">
+                    <rect
+                      x="40"
+                      y="178"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="54" cy="200" r="4" fill="#34d399" />
+                    <text
+                      x="64"
+                      y="196"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      vault
+                    </text>
+                    <text
+                      x="64"
+                      y="210"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      unsealed
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="240"
+                      y="178"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="254" cy="200" r="4" fill="#34d399" />
+                    <text
+                      x="264"
+                      y="196"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      terraform
+                    </text>
+                    <text
+                      x="264"
+                      y="210"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      plan
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="440"
+                      y="178"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="454" cy="200" r="4" fill="#34d399" />
+                    <text
+                      x="464"
+                      y="196"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      k8s apply
+                    </text>
+                    <text
+                      x="464"
+                      y="210"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      12 pods
+                    </text>
+                  </g>
+                  <g className="node">
+                    <rect
+                      x="640"
+                      y="178"
+                      width="80"
+                      height="44"
+                      rx="6"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <circle cx="654" cy="200" r="4" fill="#34d399" />
+                    <text
+                      x="664"
+                      y="196"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                    >
+                      verify
+                    </text>
+                    <text
+                      x="664"
+                      y="210"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      healthy
+                    </text>
+                  </g>
+                  {/* Release */}
+                  <g>
+                    <rect
+                      x="660"
+                      y="270"
+                      width="120"
+                      height="40"
+                      rx="6"
+                      fill="#1a1f2a"
+                      stroke="#fb923c"
+                    />
+                    <text
+                      x="720"
+                      y="288"
+                      fill="#fb923c"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                      textAnchor="middle"
+                    >
+                      release
+                    </text>
+                    <text
+                      x="720"
+                      y="302"
+                      fill="#818a98"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                      textAnchor="middle"
+                    >
+                      v2.14.0 → prod
+                    </text>
+                  </g>
+                  {/* Labels */}
+                  <text
+                    x="80"
+                    y="50"
+                    fill="#5b6473"
+                    fontFamily="IBM Plex Mono"
+                    fontSize="9"
+                    textAnchor="middle"
+                  >
+                    01
+                  </text>
+                  <text
+                    x="280"
+                    y="50"
+                    fill="#5b6473"
+                    fontFamily="IBM Plex Mono"
+                    fontSize="9"
+                    textAnchor="middle"
+                  >
+                    02
+                  </text>
+                  <text
+                    x="480"
+                    y="50"
+                    fill="#5b6473"
+                    fontFamily="IBM Plex Mono"
+                    fontSize="9"
+                    textAnchor="middle"
+                  >
+                    03
+                  </text>
+                  <text
+                    x="680"
+                    y="50"
+                    fill="#5b6473"
+                    fontFamily="IBM Plex Mono"
+                    fontSize="9"
+                    textAnchor="middle"
+                  >
+                    04
+                  </text>
+                  {/* Legend */}
+                  <g transform="translate(40 330)">
+                    <rect width="8" height="8" fill="#34d399" rx="2" />
+                    <text
+                      x="14"
+                      y="8"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      passing
+                    </text>
+                    <rect x="80" width="8" height="8" fill="#fbbf24" rx="2" />
+                    <text
+                      x="94"
+                      y="8"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      running
+                    </text>
+                    <rect x="160" width="8" height="8" fill="#fb923c" rx="2" />
+                    <text
+                      x="174"
+                      y="8"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                    >
+                      action required
+                    </text>
+                  </g>
+                </svg>
+
+                {/* VIZ 2: CLUSTER TOPOLOGY */}
+                <svg
+                  className={`viz${activeViz === "cluster" ? " active" : ""}`}
+                  viewBox="0 0 800 360"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="800"
+                    height="360"
+                    fill="url(#dotgrid)"
+                  />
+                  <g stroke="#2a313e" strokeWidth="1" fill="none">
+                    <path d="M400 90 L180 230" />
+                    <path d="M400 90 L400 230" />
+                    <path d="M400 90 L620 230" />
+                  </g>
+                  <circle r="3" fill="#fb923c">
+                    <animateMotion
+                      dur="2.4s"
+                      repeatCount="indefinite"
+                      path="M400 90 L180 230"
+                    />
+                  </circle>
+                  <circle r="3" fill="#fb923c">
+                    <animateMotion
+                      dur="2.4s"
+                      begin="-0.8s"
+                      repeatCount="indefinite"
+                      path="M400 90 L400 230"
+                    />
+                  </circle>
+                  <circle r="3" fill="#fb923c">
+                    <animateMotion
+                      dur="2.4s"
+                      begin="-1.6s"
+                      repeatCount="indefinite"
+                      path="M400 90 L620 230"
+                    />
+                  </circle>
+                  {/* Control plane */}
+                  <g>
+                    <rect
+                      x="320"
+                      y="40"
+                      width="160"
+                      height="60"
+                      rx="8"
+                      fill="#141821"
+                      stroke="#fb923c"
+                    />
+                    <text
+                      x="400"
+                      y="62"
+                      fill="#fb923c"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                      textAnchor="middle"
+                    >
+                      control plane
+                    </text>
+                    <text
+                      x="400"
+                      y="78"
+                      fill="#818a98"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                      textAnchor="middle"
+                    >
+                      api · scheduler · etcd
+                    </text>
+                    <circle cx="338" cy="64" r="4" fill="#34d399">
+                      <animate
+                        attributeName="opacity"
+                        values="0.4;1;0.4"
+                        dur="2s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </g>
+                  {/* Workers */}
+                  <g>
+                    <rect
+                      x="100"
+                      y="220"
+                      width="160"
+                      height="100"
+                      rx="8"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <text
+                      x="180"
+                      y="242"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                      textAnchor="middle"
+                    >
+                      worker-01
+                    </text>
+                    <text
+                      x="180"
+                      y="256"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                      textAnchor="middle"
+                    >
+                      8 cpu · 32gi
+                    </text>
+                    <g transform="translate(118 268)">
+                      <rect
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="36"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="54"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="72"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#fb923c"
+                      />
+                      <rect
+                        x="90"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                    </g>
+                  </g>
+                  <g>
+                    <rect
+                      x="320"
+                      y="220"
+                      width="160"
+                      height="100"
+                      rx="8"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <text
+                      x="400"
+                      y="242"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                      textAnchor="middle"
+                    >
+                      worker-02
+                    </text>
+                    <text
+                      x="400"
+                      y="256"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                      textAnchor="middle"
+                    >
+                      8 cpu · 32gi
+                    </text>
+                    <g transform="translate(338 268)">
+                      <rect
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="36"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="54"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="72"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="90"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      >
+                        <animate
+                          attributeName="stroke"
+                          values="#34d399;#fbbf24;#34d399"
+                          dur="2s"
+                          repeatCount="indefinite"
+                        />
+                      </rect>
+                      <rect
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                    </g>
+                  </g>
+                  <g>
+                    <rect
+                      x="540"
+                      y="220"
+                      width="160"
+                      height="100"
+                      rx="8"
+                      fill="#141821"
+                      stroke="#2a313e"
+                    />
+                    <text
+                      x="620"
+                      y="242"
+                      fill="#f3f4f6"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="11"
+                      textAnchor="middle"
+                    >
+                      worker-03
+                    </text>
+                    <text
+                      x="620"
+                      y="256"
+                      fill="#5b6473"
+                      fontFamily="IBM Plex Mono"
+                      fontSize="9"
+                      textAnchor="middle"
+                    >
+                      8 cpu · 32gi
+                    </text>
+                    <g transform="translate(558 268)">
+                      <rect
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="36"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="54"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="72"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="90"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                      <rect
+                        x="18"
+                        y="20"
+                        width="14"
+                        height="14"
+                        rx="3"
+                        fill="#0a0c10"
+                        stroke="#34d399"
+                      />
+                    </g>
+                  </g>
+                  <text
+                    x="40"
+                    y="20"
+                    fill="#5b6473"
+                    fontFamily="IBM Plex Mono"
+                    fontSize="9"
+                  >
+                    cluster: prod-eu-west-2 · 24 pods · 99.98%
+                  </text>
+                </svg>
+
+                {/* VIZ 3: TERMINAL + DASHBOARD */}
+                <div
+                  className={`viz${activeViz === "terminal" ? " active" : ""}`}
+                  style={{
+                    display: activeViz === "terminal" ? "grid" : "none",
+                    gridTemplateColumns: "1.1fr 1fr",
+                    gap: "14px",
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      background: "#0a0c10",
+                      border: "1px solid var(--border-2)",
+                      borderRadius: "8px",
+                      padding: "14px",
+                      fontFamily: "var(--mono)",
+                      fontSize: "11.5px",
+                      lineHeight: "1.65",
+                      color: "var(--text-2)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{ color: "var(--text-4)", marginBottom: "4px" }}
+                    >
+                      $ kubectl get pods -n platform
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text)" }}>NAME</span>
+                      {"                  "}
+                      <span style={{ color: "var(--text)" }}>STATUS</span>
+                      {"   "}
+                      <span style={{ color: "var(--text)" }}>AGE</span>
+                    </div>
+                    <div>
+                      credential-rotator-7d9{" "}
+                      <span style={{ color: "var(--success)" }}>Running</span>{" "}
+                      4d
+                    </div>
+                    <div>
+                      vault-agent-injector-4f{" "}
+                      <span style={{ color: "var(--success)" }}>Running</span>{" "}
+                      18d
+                    </div>
+                    <div>
+                      velero-controller-2h{" "}
+                      <span style={{ color: "var(--success)" }}>Running</span>{" "}
+                      18d
+                    </div>
+                    <div>
+                      backup-scheduler-9k{" "}
+                      <span style={{ color: "var(--success)" }}>Running</span>{" "}
+                      6d
+                    </div>
+                    <div style={{ color: "var(--text-4)", marginTop: "8px" }}>
+                      $ rotator status --target=harbor
+                    </div>
+                    <div>
+                      →{" "}
+                      <span style={{ color: "var(--accent)" }}>
+                        rotating credentials
+                      </span>{" "}
+                      [████████░░]
+                    </div>
+                    <div style={{ color: "var(--text-3)" }}>
+                      {" "}
+                      ↳ nsx-t.prod{" "}
+                      <span style={{ color: "var(--success)" }}>✓ rotated</span>
+                    </div>
+                    <div style={{ color: "var(--text-3)" }}>
+                      {" "}
+                      ↳ harbor.prod{" "}
+                      <span style={{ color: "var(--success)" }}>✓ rotated</span>
+                    </div>
+                    <div style={{ color: "var(--text-3)" }}>
+                      {" "}
+                      ↳ harbor.eu{" "}
+                      <span style={{ color: "var(--warn)" }}>
+                        ⟳ in progress
+                      </span>
+                    </div>
+                    <div style={{ color: "var(--text-3)" }}>
+                      {" "}
+                      ↳ mysql.dr{" "}
+                      <span style={{ color: "var(--text-4)" }}>queued</span>
+                    </div>
+                    <div style={{ marginTop: "8px" }}>
+                      <span style={{ color: "var(--accent)" }}>▍</span>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        border: "1px solid var(--border-2)",
+                        borderRadius: "8px",
+                        padding: "12px",
+                        background: "var(--surface-2)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--mono)",
+                          fontSize: "10px",
+                          color: "var(--text-3)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                        }}
+                      >
+                        deploys / 24h
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "22px",
+                          fontWeight: 600,
+                          marginTop: "4px",
+                        }}
+                      >
+                        147{" "}
+                        <span
+                          style={{
+                            color: "var(--success)",
+                            fontSize: "12px",
+                            fontFamily: "var(--mono)",
+                          }}
+                        >
+                          +12%
+                        </span>
+                      </div>
+                      <svg viewBox="0 0 200 40" style={{ marginTop: "8px" }}>
+                        <polyline
+                          points="0,30 20,28 40,25 60,28 80,20 100,18 120,12 140,16 160,8 180,10 200,4"
+                          fill="none"
+                          stroke="#fb923c"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      style={{
+                        border: "1px solid var(--border-2)",
+                        borderRadius: "8px",
+                        padding: "12px",
+                        background: "var(--surface-2)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--mono)",
+                          fontSize: "10px",
+                          color: "var(--text-3)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                        }}
+                      >
+                        cluster health
+                      </div>
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "repeat(8, 1fr)",
+                          gap: "3px",
+                          marginTop: "8px",
+                        }}
+                      >
+                        {[
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#fbbf24",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                          "#34d399",
+                        ].map((c, i) => (
+                          <span
+                            key={i}
+                            className="hb"
+                            style={{ background: c }}
+                          />
+                        ))}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "var(--mono)",
+                          fontSize: "10.5px",
+                          color: "var(--text-3)",
+                          marginTop: "8px",
+                        }}
+                      >
+                        99.98% uptime · 23 of 24 nodes
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        border: "1px solid var(--border-2)",
+                        borderRadius: "8px",
+                        padding: "12px",
+                        background: "var(--surface-2)",
+                        flexGrow: 1,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--mono)",
+                          fontSize: "10px",
+                          color: "var(--text-3)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                        }}
+                      >
+                        automation runs
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "4px",
+                          alignItems: "flex-end",
+                          height: "50px",
+                          marginTop: "8px",
+                        }}
+                      >
+                        {[30, 50, 40, 70, 60, 90, 75, 95, 100].map((h, i) => (
+                          <span
+                            key={i}
+                            style={{
+                              width: "12px",
+                              background: i === 8 ? "#ffa256" : "#fb923c",
+                              height: `${h}%`,
+                              borderRadius: "2px 2px 0 0",
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Floating Stats */}
-                <div className="absolute -top-6 -left-6 glass rounded-2xl p-4 backdrop-blur-xl border border-white/20 shadow-xl">
-                  <div className="text-2xl font-bold text-black">5+</div>
-                  <div className="text-sm text-gray-600">Years Experience</div>
+                {/* Floating tech badges */}
+                <div className="float-badges" aria-hidden="true">
+                  <span className="tech-badge b1">
+                    <span className="swatch" />
+                    Kubernetes
+                  </span>
+                  <span className="tech-badge b2">
+                    <span className="swatch" />
+                    Vault
+                  </span>
+                  <span className="tech-badge b3">
+                    <span className="swatch" />
+                    Terraform
+                  </span>
+                  <span className="tech-badge b4">
+                    <span className="swatch" />
+                    FastAPI
+                  </span>
+                  <span className="tech-badge b5">
+                    <span className="swatch" />
+                    GitLab CI
+                  </span>
+                  <span className="tech-badge b6">
+                    <span className="swatch" />
+                    Velero
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 glass rounded-full flex justify-center backdrop-blur-xl border border-white/20 shadow-lg animate-bounce">
-          <div className="w-1 h-3 bg-gray-600 rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(0deg);
-            opacity: 0.1;
-          }
-          50% {
-            transform: translateY(-20px) rotate(2deg);
-            opacity: 0.3;
-          }
-        }
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
-};
-
-export default Hero;
+}
