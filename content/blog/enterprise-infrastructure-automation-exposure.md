@@ -1,7 +1,7 @@
 ---
 title: "Enterprise infrastructure automation"
 description: "Spent time this year building automation that rotates privileged credentials across enterprise infrastructure platforms, including NSX-T."
-date: "2026-07-09"
+date: "2026-07-08"
 tags: ["NSX-T", "Automation", "Infrastructure"]
 ---
 

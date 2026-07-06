@@ -1,7 +1,7 @@
 ---
 title: "Next.js and the App Router"
 description: "Shipped several production apps on Next.js's App Router this year — server components, route handlers, and a new mental model."
-date: "2026-07-29"
+date: "2026-07-28"
 tags: ["Next.js", "React", "App Router"]
 ---
 

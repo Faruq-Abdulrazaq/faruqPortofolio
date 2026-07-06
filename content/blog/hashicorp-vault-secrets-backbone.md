@@ -1,7 +1,7 @@
 ---
 title: "HashiCorp Vault as a secrets backbone"
 description: "Spent real time with HashiCorp Vault this year — dynamic secrets, KV engines, and CI pipelines pulling credentials at runtime."
-date: "2026-07-13"
+date: "2026-07-12"
 tags: ["Vault", "Secrets Management", "CI/CD"]
 ---
 

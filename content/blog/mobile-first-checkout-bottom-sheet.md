@@ -1,7 +1,7 @@
 ---
 title: "Two mobile bugs, one root cause: designed for a viewport that's always tall enough"
 description: "A checkout modal shipped looking complete on desktop. Two separate bugs only showed up on an actual phone."
-date: "2026-07-23"
+date: "2026-07-22"
 tags: ["Tailwind CSS", "Mobile UX", "Responsive Design"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Ansible for real infrastructure, not just demos"
 description: "Spent time this year writing Ansible for tasks with real consequences — remote account management and service restarts on live boxes."
-date: "2026-07-17"
+date: "2026-07-16"
 tags: ["Ansible", "Automation", "SSH"]
 ---
 

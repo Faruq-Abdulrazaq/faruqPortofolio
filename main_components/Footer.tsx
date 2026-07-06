@@ -77,10 +77,6 @@ export default function Footer() {
             <h5>Status</h5>
             <ul>
               <li>
-                <span style={{ color: "var(--success)" }}>●</span>{" "}
-                &nbsp;Available · Jun 2026
-              </li>
-              <li>
                 <span
                   className="mono"
                   style={{ color: "var(--text-3)", fontSize: "12px" }}

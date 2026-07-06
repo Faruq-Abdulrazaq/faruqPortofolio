@@ -1,7 +1,7 @@
 ---
 title: "rm deletes a file. It does not delete it from git."
 description: "The live site showed the framework's default starter page. Nothing to do with the framework, the host, or environment variables."
-date: "2026-07-15"
+date: "2026-07-14"
 tags: ["Next.js", "Git", "Deployment"]
 ---
 

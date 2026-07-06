@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes disaster recovery"
 description: "Got deep into Kubernetes backup and recovery this year — Velero, MinIO, and restore automation triggered through CI."
-date: "2026-07-21"
+date: "2026-07-20"
 tags: ["Kubernetes", "Velero", "MinIO"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Firestore and NoSQL data modeling"
 description: "Spent time this year working with Firestore in production — transactions, security rules, and staying consistent under concurrent writes."
-date: "2026-08-02"
+date: "2026-08-01"
 tags: ["Firestore", "NoSQL", "Data Modeling"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Firestore transactions don't tell you the rule you just broke"
 description: "A stock-decrement function passed code review and every single-item test. It only broke once a real customer put two items in their cart."
-date: "2026-07-07"
+date: "2026-07-06"
 tags: ["Firestore", "Concurrency", "Node.js"]
 ---
 

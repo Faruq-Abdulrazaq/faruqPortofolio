@@ -1,7 +1,7 @@
 ---
 title: "CI/CD pipeline hardening"
 description: "A good chunk of this year went into hardening GitLab CI pipelines that touch real infrastructure."
-date: "2026-07-25"
+date: "2026-07-24"
 tags: ["GitLab CI", "CI/CD", "Reliability"]
 ---
 

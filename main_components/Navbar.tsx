@@ -35,11 +35,6 @@ export default function Navbar() {
         </div>
 
         <div className="nav-right">
-          <span className="status-pill nav-status">
-            <span className="status-dot" />
-            <span>available · jun 2026</span>
-          </span>
-
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === "dark" ? (
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

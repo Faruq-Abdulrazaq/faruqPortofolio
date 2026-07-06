@@ -1,7 +1,7 @@
 ---
 title: "declare global means global — even across files that don't import each other"
 description: "A route rename looked complete the moment every file moved. Two commits later, CI failed on a file that had nothing to do with the rename."
-date: "2026-07-19"
+date: "2026-07-18"
 tags: ["TypeScript", "Next.js", "CI/CD"]
 ---
 

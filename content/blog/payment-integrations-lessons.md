@@ -1,7 +1,7 @@
 ---
 title: "Payment integrations"
 description: "Built and shipped several production payment integrations this year — checkout flows, webhook handling, and signature verification."
-date: "2026-08-08"
+date: "2026-08-07"
 tags: ["Payments", "API Design"]
 ---
 

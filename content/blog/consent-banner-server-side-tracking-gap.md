@@ -1,7 +1,7 @@
 ---
 title: "Consent banners are a UI checkbox until you trace the data path"
 description: "Adding server-side conversion tracking for an e-commerce client's checkout meant revisiting a cookie banner shipped weeks earlier — and finding it didn't cover half the tracking."
-date: "2026-08-10"
+date: "2026-08-09"
 tags: ["Privacy", "Next.js", "API Routes"]
 ---
 

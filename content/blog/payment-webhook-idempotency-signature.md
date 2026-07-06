@@ -1,7 +1,7 @@
 ---
 title: "The two lines that separate a webhook demo from a webhook that survives production"
 description: "Payment webhooks fire more than once for the same event. Design for it, or your customer gets charged and your order gets duplicated."
-date: "2026-08-04"
+date: "2026-08-03"
 tags: ["Payments", "Webhooks", "API Design"]
 ---
 

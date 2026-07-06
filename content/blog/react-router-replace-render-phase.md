@@ -1,7 +1,7 @@
 ---
 title: "Why my auth guard worked for months, then warned on logout"
 description: "A router redirect sitting inside a normal-looking auth check violated React's render rules — and only surfaced on the one flow that hit it live."
-date: "2026-07-11"
+date: "2026-07-10"
 tags: ["React", "Next.js", "Auth"]
 ---
 

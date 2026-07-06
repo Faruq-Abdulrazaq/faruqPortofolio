@@ -1,7 +1,7 @@
 ---
 title: "as object didn't fix my type error — it just hid it"
 description: "The function's declared signature and its actual runtime behavior had quietly diverged, and nothing caught it until a test exercised the string branch."
-date: "2026-07-27"
+date: "2026-07-26"
 tags: ["TypeScript", "Testing", "Vitest"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Reusing one component across three business lines — and where that stops being free"
 description: "A payment component built for a nonprofit client's donation campaign ended up handling checkout for two unrelated business lines, through a single new prop."
-date: "2026-07-31"
+date: "2026-07-30"
 tags: ["React", "Component Design", "Firestore"]
 ---
 
