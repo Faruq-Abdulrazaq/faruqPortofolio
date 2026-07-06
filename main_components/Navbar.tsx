@@ -20,17 +20,18 @@ export default function Navbar() {
   return (
     <nav className="nav">
       <div className="container nav-inner">
-        <a className="brand" href="#top" aria-label="Faruq Abdulrazaq home">
+        <a className="brand" href="/" aria-label="Faruq Abdulrazaq home">
           <span className="brand-name">Faruq Abdulrazaq</span>
           <span className="brand-suffix">/ platform.eng</span>
         </a>
 
         <div className={`nav-links${menuOpen ? " open" : ""}`}>
-          <a className="nav-link" href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a className="nav-link" href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-          <a className="nav-link" href="#work" onClick={() => setMenuOpen(false)}>Work</a>
-          <a className="nav-link" href="#stack" onClick={() => setMenuOpen(false)}>Stack</a>
-          <a className="nav-link" href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <a className="nav-link" href="/#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a className="nav-link" href="/#services" onClick={() => setMenuOpen(false)}>Services</a>
+          <a className="nav-link" href="/#work" onClick={() => setMenuOpen(false)}>Work</a>
+          <a className="nav-link" href="/#stack" onClick={() => setMenuOpen(false)}>Stack</a>
+          <a className="nav-link" href="/blogs" onClick={() => setMenuOpen(false)}>Blog</a>
+          <a className="nav-link" href="/#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </div>
 
         <div className="nav-right">

@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container">
         <div className="foot-grid">
           <div className="foot-bio">
-            <a className="brand" href="#top" style={{ marginBottom: "14px" }}>
+            <a className="brand" href="/" style={{ marginBottom: "14px" }}>
               <Image
                 src="/icon.png"
                 alt="Faruq Abdulrazaq"
@@ -25,19 +25,22 @@ export default function Footer() {
             <h5>Sitemap</h5>
             <ul>
               <li>
-                <a href="#about">About</a>
+                <a href="/#about">About</a>
               </li>
               <li>
-                <a href="#services">Services</a>
+                <a href="/#services">Services</a>
               </li>
               <li>
-                <a href="#work">Work</a>
+                <a href="/#work">Work</a>
               </li>
               <li>
-                <a href="#stack">Stack</a>
+                <a href="/#stack">Stack</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="/blogs">Blog</a>
+              </li>
+              <li>
+                <a href="/#contact">Contact</a>
               </li>
             </ul>
           </div>
@@ -66,7 +69,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#contact">Calendly</a>
+                <a href="/#contact">Calendly</a>
               </li>
             </ul>
           </div>

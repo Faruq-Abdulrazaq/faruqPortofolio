@@ -1244,6 +1244,112 @@ footer .container { position: relative; z-index: 1; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* =========================================================
+   BLOG
+   ========================================================= */
+
+.container-narrow {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.blog-hero { padding-bottom: 48px; }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.blog-card:hover {
+  border-color: var(--border-2);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.blog-card h3 { margin-top: 14px; font-size: 20px; }
+.blog-card h3 a:hover { color: var(--accent); }
+.blog-card p { margin-top: 10px; font-size: 14.5px; color: var(--text-3); flex: 1; }
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-4);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.blog-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+
+.blog-post-head { padding-bottom: 40px; }
+.blog-back { padding: 0; }
+
+.blog-content {
+  padding: 56px 0 80px;
+  color: var(--text-2);
+  font-size: 16.5px;
+  line-height: 1.75;
+}
+.blog-content h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  margin-top: 48px;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.blog-content h2:first-child { margin-top: 0; }
+.blog-content h3 { font-size: 19px; margin-top: 32px; color: var(--text); }
+.blog-content p { margin: 18px 0; color: var(--text-2); }
+.blog-content a { color: var(--accent); border-bottom: 1px solid var(--accent-soft); }
+.blog-content a:hover { border-bottom-color: var(--accent); }
+.blog-content strong { color: var(--text); font-weight: 600; }
+.blog-content ul, .blog-content ol { margin: 18px 0; padding-left: 22px; color: var(--text-2); }
+.blog-content li { margin: 8px 0; }
+.blog-content blockquote {
+  margin: 24px 0;
+  padding: 4px 20px;
+  border-left: 2px solid var(--accent);
+  color: var(--text-3);
+}
+.blog-content code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--surface-3);
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.blog-content pre {
+  margin: 24px 0;
+  padding: 20px 22px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  box-shadow: var(--shadow-1);
+}
+.blog-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+@media (max-width: 720px) {
+  .blog-content { padding: 40px 0 56px; font-size: 15.5px; }
+}
+
+/* =========================================================
    Light mode component overrides
    ========================================================= */
 

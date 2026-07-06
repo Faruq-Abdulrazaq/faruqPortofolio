@@ -1,195 +1,82 @@
-// app/blogs/page.tsx
-"use client";
-
-import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { ArrowBigRightDashIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { Footer, Main_footer } from "@/main_components";
+import { Navbar, Footer } from "@/main_components";
+import { getAllPosts } from "@/lib/blog";
 
-const Blogs = () => {
-  const formSchema = z.object({
-    username: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
-    }),
-  });
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
-  });
+export const revalidate = 3600;
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
-  return (
-    <div className="w-full">
-      <div className="w-full flex flex-wap justify-between  items-center p-4">
-        <div className="flex-shrink-0">
-          <Image
-            className="ml-auto lg:ml-20"
-            src="/faruq_logo_main.png"
-            alt="faruq logo"
-            width={150}
-            height={150}
-          />
-        </div>
-        <div className="hidden lg:flex items-center justify-end gap-5">
-          <Button variant="outline">Home</Button>
-          <Button className="bg-faruq_secondry mr-5">Contact me</Button>
-        </div>
-      </div>
-      <header className="flex flex-col gap-3 p-10 ml-auto lg:ml-24">
-        <h3 className="text-faruq_secondry text-[25px]">Blogs</h3>
-        <h1 className="text-[40px]">News, Updates and more</h1>
-        <h4 className="text-[20px]">Stay up to date with tech</h4>
-      </header>
-      <section className="flex justify-center flex-col">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex lg:ml-28 ml-auto p-4 gap-3"
-          >
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Search blog" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-        </Form>
-        <div className="m-20 ml-32 flex flex-wrap gap-12">
-          <div className="border w-96 h-[650px] flex flex-col gap-2">
-            <Image
-              src="/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg"
-              alt="blog_image"
-              width={400}
-              height={150}
-            />
-            <div className="m-5 flex gap-3 flex-col">
-              <p className="text-[15px] text-faruq_secondry">20 minus ago</p>
-              <h2 className="font-bold text-[20px]">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-              </h2>
-              <h2 className="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-                incidunt harum sed vero? Ex eum deserunt natus dolorem pariatur
-                repellendus repudiandae laborum?
-              </h2>
-              <Link href="/blogs" className="flex gap-1 text-faruq_primary">
-                Read more
-                <ArrowBigRightDashIcon />
-              </Link>
-            </div>
-          </div>
-          <div className="border w-96 h-[650px] flex flex-col gap-2">
-            <Image
-              src="/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg"
-              alt="blog_image"
-              width={400}
-              height={150}
-            />
-            <div className="m-5 flex gap-3 flex-col">
-              <p className="text-[15px] text-faruq_secondry">20 minus ago</p>
-              <h2 className="font-bold text-[20px]">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-              </h2>
-              <h2 className="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-                incidunt harum sed vero? Ex eum deserunt natus dolorem pariatur
-                repellendus repudiandae laborum?
-              </h2>
-              <Link href="/blogs" className="flex gap-1 text-faruq_primary">
-                Read more
-                <ArrowBigRightDashIcon />
-              </Link>
-            </div>
-          </div>
-          <div className="border w-96 h-[650px] flex flex-col gap-2">
-            <Image
-              src="/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg"
-              alt="blog_image"
-              width={400}
-              height={150}
-            />
-            <div className="m-5 flex gap-3 flex-col">
-              <p className="text-[15px] text-faruq_secondry">20 minus ago</p>
-              <h2 className="font-bold text-[20px]">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-              </h2>
-              <h2 className="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-                incidunt harum sed vero? Ex eum deserunt natus dolorem pariatur
-                repellendus repudiandae laborum?
-              </h2>
-              <Link href="/blogs" className="flex gap-1 text-faruq_primary">
-                Read more
-                <ArrowBigRightDashIcon />
-              </Link>
-            </div>
-          </div>
-          <div className="border w-96 h-[650px] flex flex-col gap-2">
-            <Image
-              src="/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg"
-              alt="blog_image"
-              width={400}
-              height={150}
-            />
-            <div className="m-5 flex gap-3 flex-col">
-              <p className="text-[15px] text-faruq_secondry">20 minus ago</p>
-              <h2 className="font-bold text-[20px]">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-              </h2>
-              <h2 className="">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Nesciunt, aliquid hic quisquam fuga, sit voluptates deserunt est
-                incidunt harum sed vero? Ex eum deserunt natus dolorem pariatur
-                repellendus repudiandae laborum?
-              </h2>
-              <Link href="/blogs" className="flex gap-1 text-faruq_primary">
-                Read more
-                <ArrowBigRightDashIcon />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      <Main_footer />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Notes from real production work — Firestore, TypeScript, React, Next.js, and the specific bugs that shipped before they were caught.",
+  alternates: { canonical: "/blogs" },
 };
 
-export default Blogs;
+const arrowIcon = (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M7 17L17 7M9 7h8v8" />
+  </svg>
+);
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+export default function BlogsPage() {
+  const posts = getAllPosts();
+
+  return (
+    <>
+      <Navbar />
+      <main id="top">
+        <section className="section blog-hero">
+          <div className="container">
+            <span className="eyebrow">WRITING</span>
+            <h1 style={{ marginTop: "14px" }}>Notes from production.</h1>
+            <p className="lead" style={{ marginTop: "14px" }}>
+              Specific bugs, the code that caused them, and the fix — pulled
+              straight from real work, not tutorials.
+            </p>
+          </div>
+        </section>
+
+        <div className="rule" />
+
+        <section className="section">
+          <div className="container">
+            <div className="blog-grid">
+              {posts.map((post) => (
+                <article key={post.slug} className="blog-card">
+                  <div className="blog-card-meta mono">
+                    <span>{formatDate(post.date)}</span>
+                    <span>·</span>
+                    <span>{post.readingTime}</span>
+                  </div>
+                  <h3>
+                    <Link href={`/blogs/${post.slug}`}>{post.title}</Link>
+                  </h3>
+                  <p>{post.description}</p>
+                  <div className="blog-card-tags">
+                    {post.tags.map((tag) => (
+                      <span key={tag} className="chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <Link href={`/blogs/${post.slug}`} className="proj-cta">
+                    read more {arrowIcon}
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
