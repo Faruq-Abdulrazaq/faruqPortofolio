@@ -7,8 +7,9 @@ import { getPublishedSlugs, getPostBySlug, isPublished } from "@/lib/blog";
 
 export const revalidate = 3600;
 
-export function generateStaticParams() {
-  return getPublishedSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const slugs = await getPublishedSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post || !isPublished(post.date)) return {};
 
   return {
@@ -53,7 +54,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post || !isPublished(post.date)) notFound();
 
   const html = await marked.parse(post.content);

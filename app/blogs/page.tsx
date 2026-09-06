@@ -26,8 +26,8 @@ function formatDate(iso: string) {
   });
 }
 
-export default function BlogsPage() {
-  const posts = getAllPosts();
+export default async function BlogsPage() {
+  const posts = await getAllPosts();
 
   return (
     <>

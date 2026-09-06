@@ -13,8 +13,8 @@ export default async function AdminDashboardLayout({
   const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   const isValid = token ? await verifySessionToken(token) : false;
 
-  // Belt-and-suspenders alongside middleware.ts — catches any route added
-  // later that misses the middleware matcher.
+  // Belt-and-suspenders alongside proxy.ts — catches any route added
+  // later that misses its matcher.
   if (!isValid) {
     redirect("/admin/login");
   }
@@ -33,6 +33,9 @@ export default async function AdminDashboardLayout({
             </Link>
             <Link className="nav-link" href="/admin/clients">
               Clients
+            </Link>
+            <Link className="nav-link" href="/admin/blogs">
+              Blog
             </Link>
           </nav>
           <LogoutButton />

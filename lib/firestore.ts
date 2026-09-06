@@ -1,10 +1,12 @@
 import type { DocumentSnapshot } from "firebase-admin/firestore";
 import { getDb } from "./firebase-admin";
 import type { Client, Invoice, InvoiceItem } from "@/types/invoice";
+import type { BlogPost } from "@/types/blog";
 
 export const COL = {
   clients: "portfolio_clients",
   invoices: "portfolio_invoices",
+  blogPosts: "portfolio_blog_posts",
 } as const;
 
 function toIso(value: unknown): string | undefined {
@@ -254,4 +256,98 @@ export async function setInvoicePaystackReference(
     .collection(COL.invoices)
     .doc(id)
     .update({ paystackReference: reference, updatedAt: new Date() });
+}
+
+// Blog posts
+
+function blogPostFromDoc(doc: DocumentSnapshot): BlogPost {
+  const data = doc.data()!;
+  return {
+    id: doc.id,
+    slug: data.slug,
+    title: data.title,
+    description: data.description,
+    date: data.date,
+    tags: (data.tags ?? []) as string[],
+    content: data.content,
+    createdAt: toIso(data.createdAt) ?? new Date().toISOString(),
+    updatedAt: toIso(data.updatedAt) ?? new Date().toISOString(),
+  };
+}
+
+export type BlogPostInput = {
+  title: string;
+  slug: string;
+  description: string;
+  date: string;
+  tags: string[];
+  content: string;
+};
+
+// All posts, admin view — includes unpublished/future-dated ones.
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  const snap = await getDb()
+    .collection(COL.blogPosts)
+    .orderBy("date", "desc")
+    .get();
+  return snap.docs.map(blogPostFromDoc);
+}
+
+export async function getBlogPostById(id: string): Promise<BlogPost | null> {
+  const doc = await getDb().collection(COL.blogPosts).doc(id).get();
+  return doc.exists ? blogPostFromDoc(doc) : null;
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const snap = await getDb()
+    .collection(COL.blogPosts)
+    .where("slug", "==", slug)
+    .limit(1)
+    .get();
+  if (snap.empty) return null;
+  return blogPostFromDoc(snap.docs[0]);
+}
+
+async function isSlugTaken(slug: string, excludeId?: string): Promise<boolean> {
+  const snap = await getDb()
+    .collection(COL.blogPosts)
+    .where("slug", "==", slug)
+    .limit(2)
+    .get();
+  return snap.docs.some((d) => d.id !== excludeId);
+}
+
+export async function addBlogPost(
+  input: BlogPostInput,
+): Promise<{ ok: true; post: BlogPost } | { ok: false; reason: string }> {
+  if (await isSlugTaken(input.slug)) {
+    return { ok: false, reason: "A post with this slug already exists" };
+  }
+  const ref = getDb().collection(COL.blogPosts).doc();
+  const now = new Date();
+  await ref.set({ ...input, createdAt: now, updatedAt: now });
+  const doc = await ref.get();
+  return { ok: true, post: blogPostFromDoc(doc) };
+}
+
+export async function updateBlogPost(
+  id: string,
+  input: BlogPostInput,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  const ref = getDb().collection(COL.blogPosts).doc(id);
+  const doc = await ref.get();
+  if (!doc.exists) return { ok: false, reason: "Not found" };
+  if (await isSlugTaken(input.slug, id)) {
+    return { ok: false, reason: "A post with this slug already exists" };
+  }
+  await ref.update({ ...input, updatedAt: new Date() });
+  return { ok: true };
+}
+
+export async function deleteBlogPost(id: string): Promise<boolean> {
+  const ref = getDb().collection(COL.blogPosts).doc(id);
+  const doc = await ref.get();
+  if (!doc.exists) return false;
+  await ref.delete();
+  return true;
 }

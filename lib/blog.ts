@@ -1,9 +1,6 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import readingTime from "reading-time";
-
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/firestore";
+import type { BlogPost as StoredBlogPost } from "@/types/blog";
 
 export type BlogPostMeta = {
   slug: string;
@@ -18,59 +15,36 @@ export type BlogPost = BlogPostMeta & {
   content: string;
 };
 
-function readPostFile(slug: string) {
-  const filePath = path.join(BLOG_DIR, `${slug}.md`);
-  const raw = fs.readFileSync(filePath, "utf8");
-  return matter(raw);
-}
-
-export function getAllSlugs(): string[] {
-  return fs
-    .readdirSync(BLOG_DIR)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => file.replace(/\.md$/, ""));
-}
-
 export function isPublished(date: string): boolean {
   return new Date(date).getTime() <= Date.now();
 }
 
-export function getPublishedSlugs(): string[] {
-  return getAllSlugs().filter((slug) => {
-    const { data } = readPostFile(slug);
-    return isPublished(data.date as string);
-  });
+function toMeta(post: StoredBlogPost): BlogPostMeta {
+  return {
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+    date: post.date,
+    tags: post.tags,
+    readingTime: readingTime(post.content).text,
+  };
 }
 
-export function getAllPosts(): BlogPostMeta[] {
-  return getPublishedSlugs()
-    .map((slug) => {
-      const { data, content } = readPostFile(slug);
-      return {
-        slug,
-        title: data.title as string,
-        description: data.description as string,
-        date: data.date as string,
-        tags: (data.tags as string[]) ?? [],
-        readingTime: readingTime(content).text,
-      };
-    })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+// Published posts only, newest first — used by the public /blogs list and
+// generateStaticParams (so unpublished/future-dated posts are never
+// statically generated or listed).
+export async function getAllPosts(): Promise<BlogPostMeta[]> {
+  const posts = await getAllBlogPosts();
+  return posts.filter((p) => isPublished(p.date)).map(toMeta);
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
-  try {
-    const { data, content } = readPostFile(slug);
-    return {
-      slug,
-      title: data.title as string,
-      description: data.description as string,
-      date: data.date as string,
-      tags: (data.tags as string[]) ?? [],
-      readingTime: readingTime(content).text,
-      content,
-    };
-  } catch {
-    return null;
-  }
+export async function getPublishedSlugs(): Promise<string[]> {
+  const posts = await getAllBlogPosts();
+  return posts.filter((p) => isPublished(p.date)).map((p) => p.slug);
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const post = await getBlogPostBySlug(slug);
+  if (!post) return null;
+  return { ...toMeta(post), content: post.content };
 }
