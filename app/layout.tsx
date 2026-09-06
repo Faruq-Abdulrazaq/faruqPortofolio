@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { NavProgress } from "@/components/nav-progress";
+import { SITE_URL } from "@/lib/site";
 
 const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
@@ -36,12 +39,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Faruq Abdulrazaq" }],
   creator: "Faruq Abdulrazaq",
   publisher: "Faruq Abdulrazaq",
-  metadataBase: new URL("https://faruqabdulrazaq.dev"),
+  metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://faruqabdulrazaq.dev",
+    url: SITE_URL,
     title: "Faruq Abdulrazaq — Automation & Platform Engineering",
     description:
       "Automation Engineer and Full Stack Developer building infrastructure automation, Kubernetes operations, and enterprise software systems.",
@@ -70,7 +73,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={ibmPlexMono.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={ibmPlexMono.variable}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link
@@ -82,6 +90,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)}catch(e){}})()` }} />
       </head>
       <body>
+        <Suspense fallback={null}>
+          <NavProgress />
+        </Suspense>
         {children}
         <Toaster
           position="top-right"

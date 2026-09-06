@@ -10,7 +10,7 @@ export default function Footer() {
               <Image
                 src="/icon.png"
                 alt="Faruq Abdulrazaq"
-                width={36}
+                width={56}
                 height={36}
                 className="brand-mark"
               />

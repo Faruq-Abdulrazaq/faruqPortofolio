@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { SITE_URL } from "@/lib/site";
+
+const SITE_HOST = new URL(SITE_URL).host;
 
 export async function POST(req: Request) {
   try {
@@ -41,7 +44,7 @@ export async function POST(req: Request) {
             <div style="color:#818a98;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">Brief</div>
             <div style="background:#0f1218;padding:16px;border-radius:6px;border:1px solid #1f242e;white-space:pre-wrap;line-height:1.65;font-size:13px;">${escapeHtml(message ?? "—")}</div>
           </div>
-          <div style="margin-top:24px;color:#5b6473;font-size:11px;">Sent from faruqabdulrazaq.dev · Reply to respond directly.</div>
+          <div style="margin-top:24px;color:#5b6473;font-size:11px;">Sent from ${SITE_HOST} · Reply to respond directly.</div>
         </div>
       `,
     };
