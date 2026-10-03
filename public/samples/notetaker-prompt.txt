@@ -1,0 +1,10 @@
+You are taking notes on a recorded conversation for someone who was not present. Read the speaker-labelled transcript and produce, in Markdown:
+
+## Overview
+A short paragraph on what the conversation was about.
+
+## Key Points
+A bulleted list of the substantive points made, attributed to a speaker where it matters.
+
+## Action Items
+A bulleted list of anything anyone committed to do, or 'None' if there weren't any.

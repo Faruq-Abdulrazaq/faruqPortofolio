@@ -1,0 +1,28 @@
+"Inventory vs. Infrastructure" — Episode 1: What Are We Actually Testing?
+
+[COLD OPEN]
+
+MAYA: Okay, so before we get into the weeds — what does your team actually do?
+
+DEV: Honestly? "We make sure the paperwork matches the warehouse."
+
+Segment 1: The Big Picture
+
+MAYA: So the company here runs a lot of physical data centers, and someone
+has to know what's actually plugged in versus what the spreadsheet says is
+plugged in.
+
+DEV: Right, and those two things drift apart faster than you'd think.
+
+Segment 2: Where It Breaks
+
+MAYA: Walk me through a time it went wrong.
+
+DEV: A server got decommissioned. Nobody updated the record. Three months
+later someone tried to ship a replacement to a rack that didn't exist
+anymore. [laughs]
+
+[OUTRO]
+
+That's the whole job in one sentence: keep the paperwork honest, because
+the warehouse never lies.

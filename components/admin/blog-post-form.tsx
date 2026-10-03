@@ -7,7 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { blogPostSchema } from "@/lib/validations/blog";
 import type { BlogPost } from "@/types/blog";
+import { Trash2 } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
+import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 
 const formSchema = blogPostSchema.omit({ tags: true }).extend({
   tagsInput: z.string().optional(),
@@ -28,6 +30,8 @@ export function BlogPostForm({ post }: { post?: BlogPost }) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [slugTouched, setSlugTouched] = useState(Boolean(post));
 
   const {
@@ -96,6 +100,24 @@ export function BlogPostForm({ post }: { post?: BlogPost }) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function remove() {
+    if (!post) return;
+    setError("");
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/blogs/${post.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body?.message || "Delete failed");
+      }
+      router.push("/admin/blogs");
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Delete failed");
+      setDeleting(false);
     }
   }
 
@@ -171,11 +193,11 @@ export function BlogPostForm({ post }: { post?: BlogPost }) {
         )}
       </div>
 
-      <div style={{ marginTop: "22px", display: "flex", gap: "10px" }}>
+      <div className="form-actions">
         <button
           className="btn btn-primary"
           type="submit"
-          disabled={loading}
+          disabled={loading || deleting}
           style={{ opacity: loading ? 0.7 : 1 }}
         >
           {loading && <Spinner />}
@@ -188,9 +210,38 @@ export function BlogPostForm({ post }: { post?: BlogPost }) {
         >
           Cancel
         </button>
+        {post && (
+          <button
+            type="button"
+            className="btn btn-danger-outline form-actions-end"
+            onClick={() => setConfirmingDelete(true)}
+            disabled={loading || deleting}
+          >
+            {deleting ? <Spinner /> : <Trash2 size={16} aria-hidden />}
+            {deleting ? "Deleting…" : "Delete post"}
+          </button>
+        )}
       </div>
 
       {error && <div className="admin-form-error">{error}</div>}
+
+      {post && (
+        <ConfirmDialog
+          open={confirmingDelete}
+          onOpenChange={setConfirmingDelete}
+          onConfirm={remove}
+          tone="danger"
+          icon={<Trash2 size={20} aria-hidden />}
+          title="Delete this post?"
+          description={
+            <>
+              <strong>{post.title}</strong> will be removed permanently and disappear from the public blog
+              immediately. This can&apos;t be undone.
+            </>
+          }
+          confirmLabel="Delete post"
+        />
+      )}
     </form>
   );
 }

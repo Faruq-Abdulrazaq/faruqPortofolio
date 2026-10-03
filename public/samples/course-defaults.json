@@ -1,0 +1,15 @@
+{
+  "cast": {
+    "default_locale": "en-GB",
+    "speakers": {
+      "HOST": { "gender": "female", "role": "host" }
+    }
+  },
+  "pattern": {
+    "pacing": "natural",
+    "structure": {
+      "format": "course"
+    }
+  },
+  "pronunciations": { "IP": "eye pee" }
+}

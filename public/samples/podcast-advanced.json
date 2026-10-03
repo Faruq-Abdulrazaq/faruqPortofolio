@@ -1,0 +1,21 @@
+{
+  "cast": {
+    "count": 2,
+    "default_locale": "en-GB",
+    "speakers": {
+      "MAYA": { "gender": "female", "role": "host" },
+      "DEV": { "gender": "male", "role": "guest" }
+    }
+  },
+  "pattern": {
+    "turn_taking": "script",
+    "voice_assignment": "alternate_gender",
+    "pacing": "natural",
+    "structure": {
+      "format": "interview",
+      "tagline": "takes one piece of infrastructure and explains it end to end",
+      "cta": "If one segment still feels shaky, tell us which one."
+    }
+  },
+  "pronunciations": { "API": "A P I", "JSON": "Jason" }
+}

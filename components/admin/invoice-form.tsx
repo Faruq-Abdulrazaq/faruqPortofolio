@@ -149,7 +149,7 @@ export function InvoiceForm({
         <label style={{ fontFamily: "var(--mono)", fontSize: "12px", color: "var(--text-3)", textTransform: "uppercase" }}>
           Line items
         </label>
-        <div className="admin-table-wrap" style={{ marginTop: "10px" }}>
+        <div className="admin-table-wrap line-items" style={{ marginTop: "10px" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>

@@ -1,0 +1,15 @@
+"Know Your Network" — Lesson 2: Reading a Subnet Mask
+
+HOST: Okay — if I hand you an address and a mask, what's the first thing
+you look at?
+
+HOST: The mask tells you which part of the address is the network, and
+which part is the host. That's it. That's the whole trick.
+
+Segment 1: Splitting the Address
+
+HOST: Take 255.255.255.0. Three whole octets are network, one is host.
+That's a /24.
+
+HOST: A /25 just moves the line halfway through the last octet instead of
+stopping at the boundary.

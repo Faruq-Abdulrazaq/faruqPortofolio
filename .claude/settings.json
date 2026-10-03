@@ -15,7 +15,12 @@
       "Bash(xargs head -20)",
       "Bash(npx next *)",
       "Bash(dir \"c:\\\\projects\\\\faruqPortofolio\" /b)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m 'Major portfolio revamp — full redesign, new sections, email integration *)",
+      "Bash(git push *)",
+      "Bash(npm audit *)",
+      "Bash(npm uninstall *)",
+      "Bash(git commit *)"
     ],
     "additionalDirectories": [
       "c:\\projects\\faruqPortofolio\\app\\BiteCode"

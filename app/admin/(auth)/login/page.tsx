@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
         const body = await res.json().catch(() => ({}));
         throw new Error(body?.message || "Invalid credentials");
       }
-      router.push("/admin/invoices");
+      router.push("/admin");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

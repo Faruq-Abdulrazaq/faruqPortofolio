@@ -1,0 +1,7 @@
+{
+  "narrator": { "gender": "male", "locale": "en-GB", "rate": "-5%" },
+  "skip": ["preface"],
+  "toc_depth": 0,
+  "pronunciations": { "Gryphon": "Griffin" },
+  "pauses": { "scene_break": 2000 }
+}
